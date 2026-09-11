@@ -93,6 +93,7 @@ body.light-mode {
     font-size: 3rem; color: var(--gold);
     letter-spacing: 8px; margin-bottom: 1.5rem;
     animation: pulse 1.5s infinite;
+    direction: ltr;
 }
 .loader-bar {
     width: 150px; height: 2px;
@@ -115,11 +116,10 @@ h1, h2, h3, h4 {
 }
 
 /* ⭐ FIX: Font fallback chain for Arabic mode */
-/* This way: English → Cormorant, Arabic → Reem Kufi Ink */
 body.rtl h1, body.rtl h2, body.rtl h3, body.rtl h4 { 
     font-family: 'Cormorant Garamond', 'Reem Kufi Ink', serif;
     font-weight: 400;
-    letter-spacing: 0; /* 🔥 CRITICAL: remove all letter-spacing for Arabic */
+    letter-spacing: 0;
 }
 
 .section-title {
@@ -198,7 +198,7 @@ body.light-mode header.scrolled {
     border-color: rgba(42, 8, 12, 0.25);
 }
 
-.logo { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.logo { display: flex; flex-direction: column; align-items: center; line-height: 1; direction: ltr; }
 .logo-main {
     font-family: var(--font-serif);
     font-size: 2rem; color: var(--gold); letter-spacing: 4px;
@@ -214,7 +214,7 @@ body.light-mode header.scrolled {
     letter-spacing: 2px; position: relative; color: var(--cream);
     cursor: pointer;
 }
-body.rtl .nav-links a { font-family: var(--font-arabic); letter-spacing: 0; }
+body.rtl .nav-links a { font-family: var(--font-arabic); letter-spacing: 0; text-transform: none; }
 .nav-links a::after {
     content: ''; position: absolute;
     bottom: -5px; left: 0; width: 0; height: 1px;
@@ -267,7 +267,7 @@ body.rtl .nav-links a { font-family: var(--font-arabic); letter-spacing: 0; }
     background: transparent; cursor: pointer;
     transition: var(--transition);
 }
-body.rtl .btn-reserve { font-family: var(--font-arabic); letter-spacing: 0; }
+body.rtl .btn-reserve { font-family: var(--font-arabic); letter-spacing: 0; text-transform: none; }
 .btn-reserve:hover { background: var(--gold); color: var(--bg-dark); }
 .menu-toggle {
     display: none; flex-direction: column;
@@ -377,10 +377,10 @@ body.rtl .hero-content { text-align: right; }
     text-transform: uppercase;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 1), 0 0 40px rgba(0, 0, 0, 0.8);
 }
-/* 🔥 FIX: Arabic eyebrow - zero letter-spacing, simpler shadow */
 body.rtl .hero-eyebrow { 
     font-family: var(--font-arabic); 
     letter-spacing: 0;
+    text-transform: none;
     text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
 }
 .meta-divider {
@@ -430,7 +430,6 @@ body.rtl .open-status { font-family: var(--font-arabic); letter-spacing: 0; }
         0 2px 8px rgba(0, 0, 0, 0.9),
         0 0 80px rgba(212, 175, 55, 0.25);
 }
-/* 🔥 FIX: Arabic headline - fallback font, no letter-spacing, simpler shadow */
 body.rtl .hero-headline { 
     font-family: 'Cormorant Garamond', 'Reem Kufi Ink', serif;
     font-weight: 400;
@@ -508,7 +507,6 @@ body.rtl .hero-subheadline {
     border-color: var(--gold-hover);
     box-shadow: 0 20px 50px rgba(212, 175, 55, 0.35);
 }
-/* 🔥 FIX: Arabic button */
 body.rtl .btn-primary,
 body.rtl .btn-secondary { 
     font-family: var(--font-arabic); 
@@ -565,7 +563,6 @@ body.rtl .btn-secondary {
     transition: transform 0.3s ease;
 }
 .btn-text-link:hover::after { transform: scaleX(1); }
-/* 🔥 FIX: Arabic text link */
 body.rtl .btn-text-link { 
     font-family: var(--font-arabic); 
     letter-spacing: 0;
@@ -662,7 +659,6 @@ body.rtl .modal-close { right: auto; left: 1.5rem; }
     opacity: 0.7;
     margin-bottom: 0.8rem;
 }
-/* 🔥 FIX: Arabic modal eyebrow - no letter-spacing */
 body.rtl .modal-eyebrow { 
     font-family: var(--font-arabic); 
     letter-spacing: 0;
@@ -677,6 +673,7 @@ body.rtl .modal-eyebrow {
     margin-bottom: 0.5rem;
     line-height: 1;
     text-shadow: 0 4px 30px rgba(212, 175, 55, 0.3);
+    direction: ltr;
 }
 
 .modal-subtitle {
@@ -725,6 +722,7 @@ body.rtl .modal-subtitle {
     line-height: 1;
     margin-bottom: 1rem;
     text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    direction: ltr;
 }
 
 .card-word-en {
@@ -735,9 +733,9 @@ body.rtl .modal-subtitle {
     color: var(--gold);
     font-weight: 600;
     margin-bottom: 0.3rem;
+    direction: ltr;
 }
 
-/* 🔥 FIX: Arabic word in card - use Tajawal, no letter-spacing */
 .card-word-ar {
     display: block;
     font-family: var(--font-arabic);
@@ -893,6 +891,7 @@ body.rtl .instagram-feed { left: auto; right: 8%; }
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     padding: 0.5rem 0;
+    direction: ltr;
 }
 body.rtl .ig-label { transform: rotate(0deg); }
 .ig-grid { display: flex; gap: 0.5rem; }
@@ -1051,11 +1050,11 @@ body.rtl .card-overlay { text-align: right; }
     line-height: 1.2; margin-bottom: 0.5rem;
     text-shadow: 0 3px 15px rgba(0, 0, 0, 1);
 }
-/* 🔥 FIX: Font fallback chain for card title */
 body.rtl .card-title { 
     font-family: 'Cormorant Garamond', 'Reem Kufi Ink', serif;
     font-weight: 400;
     letter-spacing: 0;
+    line-height: 1.4;
 }
 .card-brand {
     font-size: 0.7rem; letter-spacing: 3px;
@@ -1150,11 +1149,11 @@ body.rtl .menu-item-price { padding-left: 0; padding-right: 10px; }
 .brand-story h2 {
     font-size: 3rem; margin-bottom: 1rem; color: var(--gold);
 }
-/* 🔥 FIX: Font fallback chain for brand story h2 */
 body.rtl .brand-story h2 { 
     font-family: 'Cormorant Garamond', 'Reem Kufi Ink', serif;
     font-weight: 400;
     letter-spacing: 0;
+    line-height: 1.5;
 }
 .brand-story p {
     font-size: 1.2rem; font-family: var(--font-serif);
@@ -1176,10 +1175,12 @@ footer {
     font-family: var(--font-serif); font-size: 2rem;
     color: var(--gold); letter-spacing: 4px;
     margin-bottom: 0.5rem;
+    direction: ltr;
 }
 .footer-sub {
     font-size: 0.65rem; letter-spacing: 6px;
     color: var(--cream); margin-bottom: 2rem;
+    direction: ltr;
 }
 .footer-links {
     display: flex; justify-content: center;
@@ -1279,7 +1280,6 @@ body.rtl .sticky-reserve {
     .desktop-only { display: none !important; }
     .mobile-only { display: block !important; }
 
-    /* ========== GLASS HEADER on Mobile ========== */
     header {
         top: 0.75rem;
         width: calc(100% - 1.5rem);
@@ -1311,7 +1311,6 @@ body.rtl .sticky-reserve {
         border-top: 1px solid rgba(212, 175, 55, 0.2);
     }
 
-    /* ========== HERO ========== */
     .hero { 
         padding: 8rem 6% 3rem; 
         text-align: center; 
@@ -1541,4 +1540,25 @@ body.rtl .sticky-reserve {
     .hero { min-height: auto; padding: 6rem 6% 2rem; }
     .hero-headline { font-size: 2rem; }
     .hero-subheadline { margin-bottom: 1rem; }
+}
+
+/* ==================== RTL MODE - FORCE LTR ON BRAND ELEMENTS ==================== */
+/* عناصر لازم تفضل LTR دايماً (اسم البراند KOVA، CAFÉ، الحروف) */
+body.rtl .logo-main,
+body.rtl .logo-sub,
+body.rtl .modal-title,
+body.rtl .card-letter,
+body.rtl .card-word-en,
+body.rtl .ig-label,
+body.rtl .footer-logo,
+body.rtl .footer-sub,
+body.rtl .loader-logo {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* Global rule: any element with explicit lang="en" stays LTR */
+[lang="en"] {
+    direction: ltr;
+    unicode-bidi: isolate;
 }

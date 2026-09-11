@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lang === 'ar') {
             timeGreeting.textContent = `${greetingAr} · كوفا`;
             timeGreeting.style.fontFamily = 'var(--font-arabic)';
-            timeGreeting.style.letterSpacing = '0.5px';
+            timeGreeting.style.letterSpacing = '0';
         } else {
             timeGreeting.textContent = `${greetingEn} · KOVA`;
             timeGreeting.style.fontFamily = '';
@@ -166,7 +166,21 @@ document.addEventListener('DOMContentLoaded', () => {
             widgetGuests: '2 Guests',
             widgetTime: '8:00 PM',
             widgetBtn: 'Check Availability →',
-            reserve: 'Reserve'
+            reserve: 'Reserve',
+            experienceTitle: 'The KOVA Experience',
+            sipMoment: 'Sip The Moment',
+            goodFood: 'Good Food<br>Great Company',
+            signatureDrinks: 'Signature Drinks',
+            kovaFeeling: 'The Kova Feeling',
+            desserts: 'DESSERTS',
+            ourMenu: 'Our Menu',
+            coffee: 'COFFEE',
+            nonCoffee: 'NON COFFEE',
+            menuCoffee: 'COFFEE',
+            menuNonCoffee: 'NON COFFEE',
+            menuDesserts: 'DESSERTS',
+            moreThanCoffee: 'More Than Coffee.<br>It\'s a Feeling.',
+            kovaMeaning: 'KOVA — Kick, Open, Vibe, Atmosphere.'
         },
         ar: {
             headlineLine1: 'قهوة ممتازة',
@@ -180,7 +194,21 @@ document.addEventListener('DOMContentLoaded', () => {
             widgetGuests: '٢ أفراد',
             widgetTime: '٨:٠٠ م',
             widgetBtn: 'تحقق من التوفر ←',
-            reserve: 'احجز'
+            reserve: 'احجز',
+            experienceTitle: 'تجربة كوفا',
+            sipMoment: 'ارتشف اللحظة',
+            goodFood: 'أكل لذيذ<br>وصحبة حلوة',
+            signatureDrinks: 'مشروباتنا المميزة',
+            kovaFeeling: 'إحساس كوفا',
+            desserts: 'الحلويات',
+            ourMenu: 'قائمتنا',
+            coffee: 'قهوة',
+            nonCoffee: 'مش قهوة',
+            menuCoffee: 'قهوة',
+            menuNonCoffee: 'مش قهوة',
+            menuDesserts: 'حلويات',
+            moreThanCoffee: 'أكثر من قهوة.<br>إنه إحساس.',
+            kovaMeaning: 'كوفا — انطلق، افتح، استمتع، أجواء.'
         }
     };
 
@@ -188,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLang = lang;
         const t = translations[lang];
 
+        // RTL/LTR Switch
         if (lang === 'ar') {
             document.body.classList.add('rtl');
             document.documentElement.setAttribute('lang', 'ar');
@@ -206,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (langArMobile) langArMobile.classList.remove('active');
         }
 
+        // Hero Headline
         const headline = document.getElementById('splitHeadline');
         if (headline) {
             const lines = headline.querySelectorAll('.line');
@@ -216,11 +246,13 @@ document.addEventListener('DOMContentLoaded', () => {
             splitTextReveal();
         }
 
+        // Hero Subheadlines
         const subheadlineDesktop = document.querySelector('.hero-subheadline.desktop-only');
         if (subheadlineDesktop) subheadlineDesktop.textContent = t.subheadline;
         const subheadlineMobile = document.querySelector('.hero-subheadline.mobile-only');
         if (subheadlineMobile) subheadlineMobile.textContent = t.subheadlineMobile;
 
+        // Hero CTAs
         const btnPrimary = document.querySelector('.btn-primary');
         const btnSecondaryDesktop = document.querySelector('.btn-secondary.desktop-only');
         const btnSecondaryMobile = document.querySelector('.btn-text-link.mobile-only');
@@ -228,9 +260,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnSecondaryDesktop) btnSecondaryDesktop.textContent = t.btnSecondary;
         if (btnSecondaryMobile) btnSecondaryMobile.textContent = t.btnSecondary + ' →';
 
+        // Scroll Indicator
         const scrollSpan = document.querySelector('.scroll-indicator span');
         if (scrollSpan) scrollSpan.textContent = t.scrollIndicator;
 
+        // Widget
         const widgetLabel = document.querySelector('.widget-label');
         const widgetValues = document.querySelectorAll('.widget-value');
         const widgetBtn = document.querySelector('.widget-btn');
@@ -239,11 +273,50 @@ document.addEventListener('DOMContentLoaded', () => {
         if (widgetValues[1]) widgetValues[1].textContent = t.widgetTime;
         if (widgetBtn) widgetBtn.textContent = t.widgetBtn;
 
+        // Reserve Buttons
         const reserveBtns = document.querySelectorAll('.btn-reserve');
         reserveBtns.forEach(btn => btn.textContent = t.reserve);
 
         const stickyBtn = document.querySelector('.sticky-reserve');
         if (stickyBtn) stickyBtn.textContent = t.reserve;
+
+        // ============ SECTIONS TRANSLATION ============
+        
+        // Features Section
+        const featuresTitle = document.querySelector('.features .section-title');
+        if (featuresTitle) featuresTitle.textContent = t.experienceTitle;
+
+        const cardTitles = document.querySelectorAll('.features .card-title');
+        if (cardTitles[0]) cardTitles[0].innerHTML = t.sipMoment;
+        if (cardTitles[1]) cardTitles[1].innerHTML = t.goodFood;
+        if (cardTitles[2]) cardTitles[2].innerHTML = t.signatureDrinks;
+        if (cardTitles[3]) cardTitles[3].innerHTML = t.kovaFeeling;
+
+        const cardBrands = document.querySelectorAll('.features .card-brand');
+        if (cardBrands[3]) cardBrands[3].textContent = t.desserts;
+
+        // Menu Section
+        const menuTitle = document.querySelector('.menu-section .section-title');
+        if (menuTitle) menuTitle.textContent = t.ourMenu;
+
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        if (tabBtns[0]) tabBtns[0].textContent = t.coffee;
+        if (tabBtns[1]) tabBtns[1].textContent = t.nonCoffee;
+        if (tabBtns[2]) tabBtns[2].textContent = t.desserts;
+
+        const menuCatTitles = document.querySelectorAll('.menu-category h3');
+        if (menuCatTitles[0]) menuCatTitles[0].textContent = t.menuCoffee;
+        if (menuCatTitles[1]) menuCatTitles[1].textContent = t.menuNonCoffee;
+        if (menuCatTitles[2]) menuCatTitles[2].textContent = t.menuDesserts;
+
+        // Brand Story
+        const brandH2 = document.querySelector('.brand-story h2');
+        if (brandH2) brandH2.innerHTML = t.moreThanCoffee;
+
+        const brandP = document.querySelector('.brand-story p');
+        if (brandP) brandP.textContent = t.kovaMeaning;
+
+        // ============ END SECTIONS TRANSLATION ============
 
         updateGreeting(lang);
         updateOpenStatus(lang);
@@ -376,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==================== MAGNETIC BUTTONS (Desktop only) ==================== */
+    /* ==================== MAGNETIC BUTTONS ==================== */
     const magneticButtons = document.querySelectorAll('.magnetic');
     if (window.innerWidth > 768) {
         magneticButtons.forEach(btn => {
@@ -418,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==================== FLOATING PARTICLES (Desktop only) ==================== */
+    /* ==================== FLOATING PARTICLES ==================== */
     const particlesContainer = document.getElementById('particles');
     if (particlesContainer && window.innerWidth > 768) {
         const particleCount = 25;
@@ -439,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.add('light-mode');
     }
 
-    /* ==================== QUOTE TICKER (Desktop only) ==================== */
+    /* ==================== QUOTE TICKER ==================== */
     const quotesEn = [
         "More than coffee. It's a feeling.",
         "Where time slows down.",
@@ -475,7 +548,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ============================================================
    🎬 AGGRESSIVE VIDEO AUTOPLAY
-   الهدف: الفيديو يشتغل تلقائي بدون أي تفاعل من المستخدم
    ============================================================ */
 (function initHeroVideo() {
     const video = document.querySelector('.hero-video');
@@ -484,12 +556,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // ✅ منع النقر على الفيديو (عشان ميفتحش Native Player على iOS)
     video.style.pointerEvents = 'none';
     video.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback');
     video.setAttribute('disablepictureinpicture', '');
 
-    // ✅ ضبط الخصائص الأساسية للتشغيل التلقائي
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
@@ -500,10 +570,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let hasPlayed = false;
 
-    // دالة المحاولة
     function attemptPlay(source = 'unknown') {
         if (hasPlayed && !video.paused) return;
-
         const playPromise = video.play();
         if (playPromise !== undefined) {
             playPromise
@@ -520,74 +588,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 1️⃣ محاولة فورية
     attemptPlay('init');
 
-    // 2️⃣ محاولة على كل Events التحميل
     ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'].forEach(evt => {
         video.addEventListener(evt, () => attemptPlay(evt), { once: true });
     });
 
-    // 3️⃣ محاولة عند جاهزية البيانات
-    video.addEventListener('loadeddata', () => {
-        setTimeout(() => attemptPlay('loadeddata-delay'), 100);
-    });
-
-    // 4️⃣ محاولة عند اكتمال تحميل الصفحة
     window.addEventListener('load', () => {
         attemptPlay('window-load');
         setTimeout(() => attemptPlay('load-300ms'), 300);
         setTimeout(() => attemptPlay('load-1000ms'), 1000);
         setTimeout(() => attemptPlay('load-2000ms'), 2000);
-        setTimeout(() => attemptPlay('load-4000ms'), 4000);
     });
 
-    // 5️⃣ محاولة عند تغيير حالة الصفحة
     document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-            attemptPlay('visibility-return');
-        } else {
-            video.pause();
-        }
+        if (!document.hidden) attemptPlay('visibility-return');
+        else video.pause();
     });
 
-    // 6️⃣ محاولة عند عودة التركيز
     window.addEventListener('focus', () => attemptPlay('window-focus'));
     window.addEventListener('pageshow', () => attemptPlay('pageshow'));
 
-    // 7️⃣ محاولة عند دخول الفيديو في الشاشة
     if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    attemptPlay('intersection');
-                }
+                if (entry.isIntersecting) attemptPlay('intersection');
             });
         }, { threshold: 0.1 });
         io.observe(video);
     }
 
-    // 8️⃣ Fallback: عند أي تفاعل
     ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(evt => {
         document.addEventListener(evt, () => attemptPlay('user-interaction'), { passive: true });
     });
 
-    // 9️⃣ مراقبة التوقف المفاجئ
-    video.addEventListener('pause', () => {
-        setTimeout(() => {
-            if (!document.hidden) attemptPlay('resume-after-pause');
-        }, 100);
-    });
-
-    // 🔟 معالجة أخطاء الشبكة
     video.addEventListener('stalled', () => {
-        console.log('📡 Video stalled, retrying...');
         video.load();
         setTimeout(() => attemptPlay('stalled-recovery'), 500);
-    });
-
-    video.addEventListener('error', (e) => {
-        console.warn('⚠️ Video error:', e);
     });
 
     console.log('🎬 Autoplay handler initialized');
