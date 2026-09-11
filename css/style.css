@@ -32,7 +32,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
 
-/* Utility Classes */
 .desktop-only { display: block; }
 .mobile-only { display: none; }
 
@@ -163,7 +162,6 @@ body.light-mode header.scrolled { background: rgba(245, 239, 230, 0.95); }
 .nav-links a:hover::after { width: 100%; }
 .header-actions { display: flex; align-items: center; gap: 1rem; }
 
-/* Mobile Lang Item (hidden on desktop) */
 .mobile-lang-item { display: none; }
 
 .lang-toggle {
@@ -228,7 +226,6 @@ body.light-mode header.scrolled { background: rgba(245, 239, 230, 0.95); }
     background: var(--bg-dark);
 }
 
-/* Video (desktop) */
 .hero-video {
     position: absolute;
     top: 0; left: 0;
@@ -240,16 +237,6 @@ body.light-mode header.scrolled { background: rgba(245, 239, 230, 0.95); }
 @keyframes kenBurns {
     0% { transform: scale(1) translate(0, 0); }
     100% { transform: scale(1.12) translate(-1.5%, -1%); }
-}
-
-/* Poster Background (mobile) - hidden on desktop */
-.hero-poster-bg {
-    display: none;
-    position: absolute;
-    inset: 0;
-    background: url('assets/images/hero-poster.jpg') center/cover no-repeat;
-    z-index: 1;
-    animation: kenBurns 25s ease-in-out infinite alternate;
 }
 
 .hero-overlay {
@@ -462,7 +449,6 @@ body.rtl .btn-secondary { font-family: var(--font-arabic); letter-spacing: 0; }
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* Text Link (mobile secondary CTA) */
 .btn-text-link {
     display: inline-block;
     font-family: var(--font-sans);
@@ -491,7 +477,6 @@ body.rtl .btn-secondary { font-family: var(--font-arabic); letter-spacing: 0; }
 .btn-text-link:hover::after { transform: scaleX(1); }
 body.rtl .btn-text-link { font-family: var(--font-arabic); }
 body.rtl .btn-text-link::after { transform-origin: right; }
-body.rtl .btn-text-link { direction: ltr; }
 
 .magnetic { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, box-shadow 0.3s ease; }
 
@@ -1132,7 +1117,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
 
 /* ==================== MOBILE HERO REDESIGN ==================== */
 @media (max-width: 768px) {
-    /* Utility toggles */
     .desktop-only { display: none !important; }
     .mobile-only { display: block !important; }
 
@@ -1142,7 +1126,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     header.scrolled { padding: 0.8rem 5%; }
 
-    /* Hide Lang Toggle + Reserve on mobile (moved inside hamburger) */
     .lang-toggle,
     .btn-reserve { display: none; }
 
@@ -1151,7 +1134,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     .logo-main { font-size: 1.6rem; letter-spacing: 3px; }
     .logo-sub { font-size: 0.55rem; letter-spacing: 4px; }
 
-    /* Show Lang Toggle inside mobile menu */
     .mobile-lang-item {
         display: block;
         margin-top: 1.5rem;
@@ -1171,9 +1153,10 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
         gap: 0;
     }
 
-    /* Hide video, show poster bg */
-    .hero-video { display: none; }
-    .hero-poster-bg { display: block; }
+    /* Video stays visible on mobile */
+    .hero-video {
+        object-position: center center;
+    }
 
     /* Stronger overlay for text readability */
     .hero-overlay {
@@ -1239,7 +1222,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     .status-dot { width: 6px; height: 6px; }
 
-    /* ========== HEADLINE (bigger, punchy) ========== */
+    /* ========== HEADLINE ========== */
     .hero-headline { 
         font-size: clamp(2.4rem, 11vw, 3rem);
         line-height: 1.15;
@@ -1251,7 +1234,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
         line-height: 1.35;
     }
 
-    /* ========== SUBHEADLINE (short version) ========== */
+    /* ========== SUBHEADLINE ========== */
     .hero-subheadline { 
         font-size: 0.9rem;
         line-height: 1.6;
@@ -1261,7 +1244,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     body.rtl .hero-subheadline { max-width: 320px; }
 
-    /* ========== CTAs (Primary big + Secondary text link) ========== */
+    /* ========== CTAs ========== */
     .hero-ctas {
         flex-direction: column;
         align-items: center;
@@ -1289,7 +1272,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     .quote-ticker { display: none; }
     .scroll-indicator { display: none; }
 
-    /* ========== Floating Actions (smaller + safe area) ========== */
+    /* ========== Floating Actions ========== */
     .floating-actions { 
         bottom: calc(1.2rem + env(safe-area-inset-bottom, 0));
         right: 1rem; 
@@ -1303,7 +1286,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     .float-btn svg { width: 15px; height: 15px; }
 
-    /* ========== Header Nav (mobile menu) ========== */
+    /* ========== Nav ========== */
     .nav-links {
         position: fixed; top: 0; right: -100%;
         width: 80%; height: 100vh;
@@ -1342,7 +1325,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     .grain-overlay { display: none; }
     .particles-container { display: none; }
 
-    /* ========== Modal (mobile) ========== */
+    /* ========== Modal ========== */
     .meaning-modal { padding: 1rem; align-items: flex-end; }
     .modal-content {
         padding: 3rem 1.2rem 2rem;
@@ -1353,27 +1336,15 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     .meaning-modal.active .modal-content {
         transform: translateY(0);
     }
-    .modal-title {
-        font-size: 2.5rem;
-        letter-spacing: 4px;
-    }
-    .modal-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 2rem;
-    }
-    .meaning-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.7rem;
-    }
+    .modal-title { font-size: 2.5rem; letter-spacing: 4px; }
+    .modal-subtitle { font-size: 0.9rem; margin-bottom: 2rem; }
+    .meaning-cards { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
     .meaning-card { padding: 1.2rem 0.6rem; }
     .card-letter { font-size: 2.2rem; margin-bottom: 0.6rem; }
     .card-word-en { font-size: 0.7rem; letter-spacing: 2px; }
     .card-word-ar { font-size: 0.85rem; }
     .card-desc-en, .card-desc-ar { font-size: 0.65rem; }
-    .modal-close {
-        width: 34px; height: 34px;
-        top: 1rem; right: 1rem;
-    }
+    .modal-close { width: 34px; height: 34px; top: 1rem; right: 1rem; }
     body.rtl .modal-close { right: auto; left: 1rem; }
 }
 

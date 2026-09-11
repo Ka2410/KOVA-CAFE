@@ -217,10 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
             splitTextReveal();
         }
 
-        // Desktop subheadline
         const subheadlineDesktop = document.querySelector('.hero-subheadline.desktop-only');
         if (subheadlineDesktop) subheadlineDesktop.textContent = t.subheadline;
-        // Mobile subheadline (short)
         const subheadlineMobile = document.querySelector('.hero-subheadline.mobile-only');
         if (subheadlineMobile) subheadlineMobile.textContent = t.subheadlineMobile;
 
@@ -253,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('kova-lang', lang);
     }
 
-    // Desktop lang toggle
     if (langToggle) {
         langToggle.addEventListener('click', (e) => {
             e.preventDefault();
@@ -262,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile lang toggle
     if (langToggleMobile) {
         langToggleMobile.addEventListener('click', (e) => {
             e.preventDefault();
@@ -482,9 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
         else video.play().catch(() => {});
     });
 
-    /* ==================== FORCE VIDEO AUTOPLAY (Desktop only) ==================== */
+    /* ==================== FORCE VIDEO AUTOPLAY (ALL DEVICES) ==================== */
     const heroVideo = document.querySelector('.hero-video');
-    if (heroVideo && window.innerWidth > 768) {
+    if (heroVideo) {
         heroVideo.muted = true;
         heroVideo.playsInline = true;
         heroVideo.setAttribute('playsinline', '');
@@ -493,6 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const playPromise = heroVideo.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
+                // لو iOS منع التشغيل، شغله عند أول لمسة
                 const playOnTouch = () => {
                     heroVideo.play().catch(() => {});
                     document.removeEventListener('touchstart', playOnTouch);
