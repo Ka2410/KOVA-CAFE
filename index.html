@@ -59,6 +59,9 @@
 </head>
 <body>
 
+    <!-- ✅ SKIP TO CONTENT - Accessibility -->
+    <a href="#home" class="skip-to-content">Skip to content</a>
+
     <div class="scroll-progress"></div>
     <div class="grain-overlay"></div>
 
@@ -69,17 +72,19 @@
         </div>
     </div>
 
+    <!-- HEADER -->
     <header id="header">
         <a href="#home" class="logo">
             <span class="logo-main">KOVA</span>
             <span class="logo-sub">CAFÉ</span>
+            <span class="nav-status-dot" id="navStatusDot" title="Open Now"></span>
         </a>
         <nav>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#reservation">Reserve</a></li>
+                <li><a href="#home" data-section="home">Home</a></li>
+                <li><a href="#gallery" data-section="gallery">Gallery</a></li>
+                <li><a href="#menu" data-section="menu">Menu</a></li>
+                <li><a href="#reservation" data-section="reservation">Reserve</a></li>
                 <li class="mobile-lang-item">
                     <button class="lang-toggle-mobile" id="langToggleMobile">
                         <span class="lang-en active">English</span>
@@ -96,7 +101,7 @@
                 <span class="lang-ar">ع</span>
             </button>
             <a href="#reservation" class="btn-reserve">Reserve</a>
-            <div class="menu-toggle" id="menuToggle">
+            <div class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </div>
         </div>
@@ -129,27 +134,39 @@
             <p class="hero-subheadline desktop-only">More than coffee. It's a feeling you'll want to come back to.</p>
             <p class="hero-subheadline mobile-only">More than coffee. It's a feeling.</p>
 
-            <div class="hero-ctas">
-                <a href="#reservation" class="btn-primary magnetic">Reserve a Table</a>
-                <button id="openMeaningModal" class="btn-secondary magnetic desktop-only">Our Story</button>
-                <button id="openMeaningModalMobile" class="btn-text-link mobile-only">Our Story →</button>
+            <!-- ✅ NEW: Compact Trust Rating (above CTA) -->
+            <div class="hero-trust-compact">
+                <div class="trust-stars-inline">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text"><strong>4.9</strong> · <strong>200+</strong> reviews</span>
+                </div>
             </div>
 
+            <div class="hero-ctas">
+                <a href="#reservation" class="btn-primary magnetic">
+                    <span>Reserve a Table</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <button id="openMeaningModal" class="btn-secondary magnetic desktop-only" onclick="window.openKovaModal(event)">Our Story</button>
+                <button id="openMeaningModalMobile" class="btn-text-link mobile-only" onclick="window.openKovaModal(event)">Our Story →</button>
+            </div>
+
+            <!-- ✅ REDESIGNED: Trust Bar (simplified) -->
             <div class="trust-bar">
-                <div class="trust-item">
-                    <span class="trust-stars">★★★★★</span>
-                    <span class="trust-text">4.9 · 200+ Reviews</span>
+                <div class="trust-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating"><span class="counter" data-target="4.9" data-decimals="1">0</span></span>
+                    <span class="reviews"><span class="counter" data-target="200">0</span>+ reviews</span>
                 </div>
-                <span class="trust-divider">·</span>
-                <div class="trust-item">
-                    <span class="trust-text">Best Coffee Cairo 2024</span>
-                </div>
+                <span class="trust-badge">☕ Best Coffee Cairo 2026</span>
             </div>
         </div>
 
         <div class="scroll-indicator desktop-only">
             <span>Scroll to Explore</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                 <path d="M12 5v14M5 12l7 7 7-7"/>
             </svg>
         </div>
@@ -163,29 +180,27 @@
             <p class="about-subtitle reveal">KOVA — Kick, Open, Vibe, Atmosphere</p>
 
             <div class="meaning-grid reveal">
-                <div class="meaning-mini-card">
+                <div class="meaning-mini-card" data-direction="left">
                     <span class="mini-letter">K</span>
                     <span class="mini-word-en">KICK</span>
                     <span class="mini-word-ar">رَكْلَة</span>
                 </div>
-                <div class="meaning-mini-card">
+                <div class="meaning-mini-card" data-direction="right">
                     <span class="mini-letter">O</span>
                     <span class="mini-word-en">OPEN</span>
                     <span class="mini-word-ar">مَفْتُوح</span>
                 </div>
-                <div class="meaning-mini-card">
+                <div class="meaning-mini-card" data-direction="left">
                     <span class="mini-letter">V</span>
                     <span class="mini-word-en">VIBE</span>
                     <span class="mini-word-ar">جَوّ</span>
                 </div>
-                <div class="meaning-mini-card">
+                <div class="meaning-mini-card" data-direction="right">
                     <span class="mini-letter">A</span>
                     <span class="mini-word-en">ATMOSPHERE</span>
                     <span class="mini-word-ar">الأَجْوَاء</span>
                 </div>
             </div>
-
-            <button class="btn-story reveal" id="openMeaningModalStory">Discover The Meaning →</button>
         </div>
     </section>
 
@@ -201,38 +216,38 @@
             <button class="gallery-filter" data-filter="brand">Brand</button>
         </div>
 
-        <div class="gallery-grid reveal">
-            <div class="gallery-item tall" data-category="interior" data-src="assets/images/gallery/gallery-3.jpg">
+        <div class="gallery-grid reveal gallery-masonry">
+            <div class="gallery-item masonry-a" data-category="interior" data-src="assets/images/gallery/gallery-3.jpg">
                 <img src="assets/images/gallery/gallery-3.jpg" alt="Welcome to KOVA" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
                 <span class="gallery-caption">Welcome to KOVA</span>
             </div>
 
-            <div class="gallery-item wide" data-category="interior" data-src="assets/images/gallery/gallery-4.jpg">
+            <div class="gallery-item masonry-b" data-category="interior" data-src="assets/images/gallery/gallery-4.jpg">
                 <img src="assets/images/gallery/gallery-4.jpg" alt="KOVA Interior" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
                 <span class="gallery-caption">Evening Ambience</span>
             </div>
 
-            <div class="gallery-item" data-category="coffee" data-src="assets/images/gallery/gallery-5.jpg">
+            <div class="gallery-item masonry-c" data-category="coffee" data-src="assets/images/gallery/gallery-5.jpg">
                 <img src="assets/images/gallery/gallery-5.jpg" alt="Sip The Feeling" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
                 <span class="gallery-caption">Sip The Feeling</span>
             </div>
 
-            <div class="gallery-item" data-category="coffee" data-src="assets/images/gallery/gallery-8.jpg">
+            <div class="gallery-item masonry-d" data-category="coffee" data-src="assets/images/gallery/gallery-8.jpg">
                 <img src="assets/images/gallery/gallery-8.jpg" alt="Signature Latte" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
                 <span class="gallery-caption">Signature Latte</span>
             </div>
 
-            <div class="gallery-item" data-category="brand" data-src="assets/images/gallery/gallery-6.jpg">
+            <div class="gallery-item masonry-e" data-category="brand" data-src="assets/images/gallery/gallery-6.jpg">
                 <img src="assets/images/gallery/gallery-6.jpg" alt="Our Menu" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
                 <span class="gallery-caption">Our Menu</span>
             </div>
 
-            <div class="gallery-item wide" data-category="interior" data-src="assets/images/gallery/gallery-10.jpg">
+            <div class="gallery-item masonry-f" data-category="interior" data-src="assets/images/gallery/gallery-10.jpg">
                 <img src="assets/images/gallery/gallery-10.jpg" alt="Every Table Tells a Tale" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
                 <span class="gallery-caption">Every Table Tells a Tale</span>
@@ -259,32 +274,56 @@
                         <div class="menu-info">
                             <span class="menu-item-name">Espresso <span class="badge-best">Best Seller</span></span>
                             <span class="menu-item-desc">Rich, bold single shot</span>
+                            <span class="menu-item-rating">★★★★★ <small>(120)</small></span>
                         </div>
-                        <span class="menu-item-price">70 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">70 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Espresso to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=200&auto=format&fit=crop" alt="Latte" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Latte <span class="badge-best">Popular</span></span>
                             <span class="menu-item-desc">Espresso + silky steamed milk</span>
+                            <span class="menu-item-rating">★★★★★ <small>(95)</small></span>
                         </div>
-                        <span class="menu-item-price">100 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">100 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Latte to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=200&auto=format&fit=crop" alt="Spanish Latte" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Spanish Latte</span>
                             <span class="menu-item-desc">Sweet condensed milk + espresso</span>
+                            <span class="menu-item-rating">★★★★☆ <small>(78)</small></span>
                         </div>
-                        <span class="menu-item-price">115 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">115 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Spanish Latte to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=200&auto=format&fit=crop" alt="Cold Brew" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Cold Brew <span class="badge-new">New</span></span>
                             <span class="menu-item-desc">Slow-steeped, smooth & cold</span>
+                            <span class="menu-item-rating">★★★★★ <small>(42)</small></span>
                         </div>
-                        <span class="menu-item-price">110 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">110 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Cold Brew to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -296,32 +335,56 @@
                         <div class="menu-info">
                             <span class="menu-item-name">Matcha Latte <span class="badge-best">Best Seller</span></span>
                             <span class="menu-item-desc">Japanese matcha + steamed milk</span>
+                            <span class="menu-item-rating">★★★★★ <small>(88)</small></span>
                         </div>
-                        <span class="menu-item-price">110 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">110 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Matcha Latte to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?q=80&w=200&auto=format&fit=crop" alt="Hot Chocolate" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Hot Chocolate</span>
                             <span class="menu-item-desc">Rich Belgian chocolate</span>
+                            <span class="menu-item-rating">★★★★★ <small>(65)</small></span>
                         </div>
-                        <span class="menu-item-price">100 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">100 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Hot Chocolate to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1572286258217-215b30f1b7f5?q=80&w=200&auto=format&fit=crop" alt="Red Velvet" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Red Velvet Latte</span>
                             <span class="menu-item-desc">Unique red velvet blend</span>
+                            <span class="menu-item-rating">★★★★☆ <small>(52)</small></span>
                         </div>
-                        <span class="menu-item-price">120 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">120 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Red Velvet Latte to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?q=80&w=200&auto=format&fit=crop" alt="Orange Juice" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Fresh Orange Juice</span>
                             <span class="menu-item-desc">100% freshly squeezed</span>
+                            <span class="menu-item-rating">★★★★★ <small>(71)</small></span>
                         </div>
-                        <span class="menu-item-price">85 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">85 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Fresh Orange Juice to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -333,32 +396,56 @@
                         <div class="menu-info">
                             <span class="menu-item-name">Chocolate Lava Cake <span class="badge-best">Best Seller</span></span>
                             <span class="menu-item-desc">Warm chocolate center</span>
+                            <span class="menu-item-rating">★★★★★ <small>(156)</small></span>
                         </div>
-                        <span class="menu-item-price">140 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">140 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Chocolate Lava Cake to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=200&auto=format&fit=crop" alt="Cheesecake" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">New York Cheesecake</span>
                             <span class="menu-item-desc">Classic creamy NY style</span>
+                            <span class="menu-item-rating">★★★★★ <small>(112)</small></span>
                         </div>
-                        <span class="menu-item-price">130 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">130 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add New York Cheesecake to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=200&auto=format&fit=crop" alt="Tiramisu" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Tiramisu</span>
                             <span class="menu-item-desc">Italian classic with espresso</span>
+                            <span class="menu-item-rating">★★★★★ <small>(87)</small></span>
                         </div>
-                        <span class="menu-item-price">135 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">135 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Tiramisu to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1607920592519-bab2a80efd55?q=80&w=200&auto=format&fit=crop" alt="Brownie" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Chocolate Brownie</span>
                             <span class="menu-item-desc">Fudgy, warm & rich</span>
+                            <span class="menu-item-rating">★★★★☆ <small>(64)</small></span>
                         </div>
-                        <span class="menu-item-price">115 <small>EGP</small></span>
+                        <div class="menu-item-actions">
+                            <span class="menu-item-price">115 <small>EGP</small></span>
+                            <button class="btn-add-order" aria-label="Add Chocolate Brownie to order">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -372,49 +459,79 @@
                 <span class="section-eyebrow">RESERVATION</span>
                 <h2 class="reservation-title">Book Your Table</h2>
                 <p class="reservation-subtitle">Reserve your spot at KOVA CAFÉ. We'll have everything ready for you.</p>
+                
+                <!-- ✅ NEW: Urgency Indicator -->
+                <div class="reservation-urgency">
+                    <span class="urgency-dot"></span>
+                    <span>⚡ Only <strong>3 tables</strong> left for tonight</span>
+                </div>
             </div>
 
             <form class="reservation-form reveal" id="reservationForm" novalidate>
+                <!-- ✅ IMPROVED: Empty State Hint -->
+                <div class="res-live-summary" id="resLiveSummary">
+                    <span class="summary-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                        </svg>
+                    </span>
+                    <span class="summary-text" id="summaryText">
+                        <span class="summary-hint">👆 Pick a date & time to get started</span>
+                    </span>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="resName">Full Name</label>
-                        <input type="text" id="resName" name="name" placeholder="John Doe" required>
+                        <input type="text" id="resName" name="name" placeholder="John Doe" required autocomplete="name">
                         <span class="form-error" data-error-for="resName"></span>
                     </div>
                     <div class="form-group">
                         <label for="resPhone">Phone Number</label>
-                        <input type="tel" id="resPhone" name="phone" placeholder="+20 XXX XXX XXXX" required>
+                        <input type="tel" id="resPhone" name="phone" placeholder="+20 XXX XXX XXXX" required autocomplete="tel">
                         <span class="form-error" data-error-for="resPhone"></span>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="resDate">Date</label>
-                        <input type="date" id="resDate" name="date" required>
+                    <div class="form-group full-width">
+                        <label>Date <span class="date-hint" id="dateHint">(From tomorrow onwards)</span></label>
+                        <div class="date-selector">
+                            <select id="resDay" class="date-select" aria-label="Day">
+                                <!-- Populated by JS -->
+                            </select>
+                            <select id="resMonth" class="date-select" aria-label="Month">
+                                <!-- Populated by JS -->
+                            </select>
+                        </div>
+                        <input type="hidden" id="resDate" name="date" required>
                         <span class="form-error" data-error-for="resDate"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="resTime">Time <span class="timezone-hint">(Cairo Time)</span></label>
-                        <select id="resTime" name="time" required>
-                            <option value="">Select Time</option>
-                            <option value="08:00">8:00 AM</option>
-                            <option value="09:00">9:00 AM</option>
-                            <option value="10:00">10:00 AM</option>
-                            <option value="11:00">11:00 AM</option>
-                            <option value="12:00">12:00 PM</option>
-                            <option value="13:00">1:00 PM</option>
-                            <option value="14:00">2:00 PM</option>
-                            <option value="15:00">3:00 PM</option>
-                            <option value="16:00">4:00 PM</option>
-                            <option value="17:00">5:00 PM</option>
-                            <option value="18:00">6:00 PM</option>
-                            <option value="19:00">7:00 PM</option>
-                            <option value="20:00">8:00 PM</option>
-                            <option value="21:00">9:00 PM</option>
-                            <option value="22:00">10:00 PM</option>
-                            <option value="23:00">11:00 PM</option>
-                        </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>Time <span class="timezone-hint">(Cairo Time)</span></label>
+                        <div class="time-slots" id="timeSlots">
+                            <button type="button" class="time-chip" data-time="08:00">8 AM</button>
+                            <button type="button" class="time-chip" data-time="09:00">9 AM</button>
+                            <button type="button" class="time-chip" data-time="10:00">10 AM</button>
+                            <button type="button" class="time-chip" data-time="11:00">11 AM</button>
+                            <button type="button" class="time-chip" data-time="12:00">12 PM</button>
+                            <button type="button" class="time-chip" data-time="13:00">1 PM</button>
+                            <button type="button" class="time-chip" data-time="14:00">2 PM</button>
+                            <button type="button" class="time-chip" data-time="15:00">3 PM</button>
+                            <button type="button" class="time-chip" data-time="16:00">4 PM</button>
+                            <button type="button" class="time-chip" data-time="17:00">5 PM</button>
+                            <button type="button" class="time-chip" data-time="18:00">6 PM</button>
+                            <button type="button" class="time-chip" data-time="19:00">7 PM</button>
+                            <button type="button" class="time-chip" data-time="20:00">8 PM</button>
+                            <button type="button" class="time-chip" data-time="21:00">9 PM</button>
+                            <button type="button" class="time-chip" data-time="22:00">10 PM</button>
+                            <button type="button" class="time-chip" data-time="23:00">11 PM</button>
+                        </div>
+                        <input type="hidden" id="resTime" name="time" required>
                         <span class="form-error" data-error-for="resTime"></span>
                     </div>
                 </div>
@@ -423,9 +540,9 @@
                     <div class="form-group full-width">
                         <label for="resGuests">Number of Guests</label>
                         <div class="guests-selector">
-                            <button type="button" class="guest-btn" data-action="minus">−</button>
+                            <button type="button" class="guest-btn" data-action="minus" aria-label="Decrease guests">−</button>
                             <input type="number" id="resGuests" name="guests" value="2" min="1" max="12" readonly>
-                            <button type="button" class="guest-btn" data-action="plus">+</button>
+                            <button type="button" class="guest-btn" data-action="plus" aria-label="Increase guests">+</button>
                         </div>
                     </div>
                 </div>
@@ -444,9 +561,15 @@
                     </div>
                 </div>
 
+                <!-- ✅ IMPROVED: Button with Success State -->
                 <button type="submit" class="btn-submit" id="submitBtn">
                     <span class="btn-text">Confirm Reservation</span>
                     <span class="btn-loader"></span>
+                    <span class="btn-success">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                    </span>
                 </button>
 
                 <p class="form-footnote">By reserving, you agree to our reservation policy. We'll send you a confirmation on WhatsApp.</p>
@@ -457,8 +580,15 @@
                 <div class="faq-grid">
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>Do I need a reservation?</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                            <span class="faq-text">
+                                <span class="faq-number-inline">01</span>
+                                Do I need a reservation?
+                            </span>
+                            <span class="faq-toggle">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 5v14M5 12h14"/>
+                                </svg>
+                            </span>
                         </button>
                         <div class="faq-answer">
                             <p>Walk-ins are always welcome, but we recommend reserving to guarantee your preferred seat, especially on weekends and evenings.</p>
@@ -467,8 +597,15 @@
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>Is there WiFi and power outlets?</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                            <span class="faq-text">
+                                <span class="faq-number-inline">02</span>
+                                Is there WiFi and power outlets?
+                            </span>
+                            <span class="faq-toggle">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 5v14M5 12h14"/>
+                                </svg>
+                            </span>
                         </button>
                         <div class="faq-answer">
                             <p>Yes! High-speed WiFi and power outlets are available at most tables. Perfect for remote work and study sessions.</p>
@@ -477,8 +614,15 @@
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>Can I book for private events?</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                            <span class="faq-text">
+                                <span class="faq-number-inline">03</span>
+                                Can I book for private events?
+                            </span>
+                            <span class="faq-toggle">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 5v14M5 12h14"/>
+                                </svg>
+                            </span>
                         </button>
                         <div class="faq-answer">
                             <p>Absolutely. We offer private event bookings for birthdays, corporate meetings, and special occasions. Contact us for details.</p>
@@ -487,8 +631,15 @@
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>What are your peak hours?</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                            <span class="faq-text">
+                                <span class="faq-number-inline">04</span>
+                                What are your peak hours?
+                            </span>
+                            <span class="faq-toggle">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 5v14M5 12h14"/>
+                                </svg>
+                            </span>
                         </button>
                         <div class="faq-answer">
                             <p>Our busiest times are Thursday–Saturday evenings (7 PM–11 PM). For a quieter experience, we recommend weekday mornings.</p>
@@ -510,7 +661,7 @@
                 <form class="newsletter-form" id="newsletterForm">
                     <label for="newsletterEmail">Join our newsletter</label>
                     <div class="newsletter-input">
-                        <input type="email" id="newsletterEmail" placeholder="your@email.com" required>
+                        <input type="email" id="newsletterEmail" placeholder="your@email.com" required autocomplete="email">
                         <button type="submit" aria-label="Subscribe">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -528,17 +679,6 @@
                     <li><a href="#">+20 123 456 7890</a></li>
                     <li><a href="#">hello@kovacafe.com</a></li>
                 </ul>
-                <div class="footer-map">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.33564065729!2d31.185427899999997!3d30.0596185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000"
-                        width="100%" 
-                        height="180" 
-                        style="border:0;border-radius:12px;margin-top:1rem;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
             </div>
             
             <div class="footer-col">
@@ -580,8 +720,36 @@
             </div>
         </div>
         
+        <!-- ✅ OPTIMIZED: Collapsible Map -->
+        <div class="footer-map-toggle" id="mapToggle">
+            <button type="button" class="map-toggle-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>View on Map</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="map-chevron">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </button>
+        </div>
+        <div class="footer-map-wrapper" id="mapWrapper">
+            <div class="footer-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.33564065729!2d31.185427899999997!3d30.0596185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000"
+                    width="100%" 
+                    height="280" 
+                    style="border:0;border-radius:12px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="KOVA CAFÉ Location">
+                </iframe>
+            </div>
+        </div>
+        
         <div class="footer-bottom">
-            <p class="copyright">&copy; 2024 KOVA CAFÉ. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 KOVA CAFÉ. All rights reserved.</p>
             <p class="footer-credit">
                 Made with ♥ by 
                 <a href="https://wa.me/201211659075" target="_blank" rel="noopener">Karam</a> 
