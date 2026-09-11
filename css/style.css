@@ -137,21 +137,18 @@ header {
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 
-    /* Glass Effect */
     background: rgba(18, 10, 10, 0.35);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(212, 175, 55, 0.15);
     border-radius: 60px;
 
-    /* Shadow + Inner Light */
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.4),
         0 4px 12px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-/* Subtle gradient highlight on top of glass */
 header::before {
     content: '';
     position: absolute;
@@ -179,7 +176,6 @@ header.scrolled {
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Light mode glass */
 body.light-mode header {
     background: rgba(245, 239, 230, 0.55);
     border-color: rgba(42, 8, 12, 0.15);
@@ -288,6 +284,9 @@ body.light-mode header.scrolled {
     object-fit: cover; object-position: center center;
     z-index: 1;
     animation: kenBurns 25s ease-in-out infinite alternate;
+    pointer-events: none; /* 👈 الحل: منع النقر على الفيديو */
+    -webkit-user-select: none;
+    user-select: none;
 }
 @keyframes kenBurns {
     0% { transform: scale(1) translate(0, 0); }
@@ -1223,7 +1222,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
         object-position: center center;
     }
 
-    /* Stronger overlay for text readability */
     .hero-overlay {
         background: linear-gradient(180deg,
             rgba(0, 0, 0, 0.75) 0%,
@@ -1260,7 +1258,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     body.rtl .hero-content { text-align: center; }
 
-    /* ========== META (compact single line) ========== */
     .hero-meta {
         display: flex;
         flex-direction: row;
@@ -1287,7 +1284,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     .status-dot { width: 6px; height: 6px; }
 
-    /* ========== HEADLINE ========== */
     .hero-headline { 
         font-size: clamp(2.4rem, 11vw, 3rem);
         line-height: 1.15;
@@ -1299,7 +1295,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
         line-height: 1.35;
     }
 
-    /* ========== SUBHEADLINE ========== */
     .hero-subheadline { 
         font-size: 0.9rem;
         line-height: 1.6;
@@ -1309,7 +1304,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     body.rtl .hero-subheadline { max-width: 320px; }
 
-    /* ========== CTAs ========== */
     .hero-ctas {
         flex-direction: column;
         align-items: center;
@@ -1332,12 +1326,10 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
         padding: 0.3rem 0;
     }
 
-    /* ========== HIDE Mini Widget, Quote, Scroll Indicator ========== */
     .mini-widget { display: none; }
     .quote-ticker { display: none; }
     .scroll-indicator { display: none; }
 
-    /* ========== Floating Actions ========== */
     .floating-actions { 
         bottom: calc(1.2rem + env(safe-area-inset-bottom, 0));
         right: 1rem; 
@@ -1351,7 +1343,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     .float-btn svg { width: 15px; height: 15px; }
 
-    /* ========== Nav (Mobile Menu) ========== */
     .nav-links {
         position: fixed;
         top: 0;
@@ -1381,7 +1372,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
 
     .nav-links a { font-size: 1rem; }
 
-    /* ========== Sections ========== */
     .section-title { font-size: 2rem; }
     .menu-container { padding: 1.5rem; }
 
@@ -1398,7 +1388,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     .grain-overlay { display: none; }
     .particles-container { display: none; }
 
-    /* ========== Modal ========== */
     .meaning-modal { padding: 1rem; align-items: flex-end; }
     .modal-content {
         padding: 3rem 1.2rem 2rem;
@@ -1437,7 +1426,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     .card-word-ar { margin-bottom: 0.5rem; }
 }
 
-/* Landscape mobile fix */
 @media (max-width: 900px) and (orientation: landscape) {
     .hero { min-height: auto; padding: 6rem 6% 2rem; }
     .hero-headline { font-size: 2rem; }

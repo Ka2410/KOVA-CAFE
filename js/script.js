@@ -474,8 +474,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ============================================================
-   🎬 AGGRESSIVE VIDEO AUTOPLAY - MOBILE FIRST
-   Runs OUTSIDE DOMContentLoaded to catch the video ASAP
+   🎬 AGGRESSIVE VIDEO AUTOPLAY
+   الهدف: الفيديو يشتغل تلقائي بدون أي تفاعل من المستخدم
    ============================================================ */
 (function initHeroVideo() {
     const video = document.querySelector('.hero-video');
@@ -484,7 +484,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Step 1: Set critical attributes IMMEDIATELY
+    // ✅ منع النقر على الفيديو (عشان ميفتحش Native Player على iOS)
+    video.style.pointerEvents = 'none';
+    video.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback');
+    video.setAttribute('disablepictureinpicture', '');
+
+    // ✅ ضبط الخصائص الأساسية للتشغيل التلقائي
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
@@ -494,51 +499,50 @@ document.addEventListener('DOMContentLoaded', () => {
     video.setAttribute('x5-playsinline', '');
 
     let hasPlayed = false;
-    let attempts = 0;
 
-    // Step 2: Attempt to play with retries
+    // دالة المحاولة
     function attemptPlay(source = 'unknown') {
         if (hasPlayed && !video.paused) return;
-        if (attempts > 20) return;
-        attempts++;
 
         const playPromise = video.play();
         if (playPromise !== undefined) {
             playPromise
                 .then(() => {
-                    hasPlayed = true;
-                    console.log(`✅ Video playing (triggered by: ${source})`);
+                    if (!hasPlayed) {
+                        hasPlayed = true;
+                        console.log(`✅ Video autoplay started (${source})`);
+                    }
                 })
                 .catch((error) => {
-                    console.log(`⏸️ Video blocked (${source}):`, error.name);
-                    setTimeout(() => attemptPlay(source + '-retry'), 400);
+                    console.log(`⏸️ Autoplay blocked (${source}):`, error.name);
+                    setTimeout(() => attemptPlay(source + '-retry'), 300);
                 });
         }
     }
 
-    // Step 3: Try immediately
+    // 1️⃣ محاولة فورية
     attemptPlay('init');
 
-    // Step 4: Try on every possible load event
-    ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough', 'playing'].forEach(evt => {
+    // 2️⃣ محاولة على كل Events التحميل
+    ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'].forEach(evt => {
         video.addEventListener(evt, () => attemptPlay(evt), { once: true });
     });
 
-    // Step 5: Try after page fully loads
+    // 3️⃣ محاولة عند جاهزية البيانات
+    video.addEventListener('loadeddata', () => {
+        setTimeout(() => attemptPlay('loadeddata-delay'), 100);
+    });
+
+    // 4️⃣ محاولة عند اكتمال تحميل الصفحة
     window.addEventListener('load', () => {
         attemptPlay('window-load');
-        setTimeout(() => attemptPlay('load-delay-300'), 300);
-        setTimeout(() => attemptPlay('load-delay-1000'), 1000);
-        setTimeout(() => attemptPlay('load-delay-2500'), 2500);
+        setTimeout(() => attemptPlay('load-300ms'), 300);
+        setTimeout(() => attemptPlay('load-1000ms'), 1000);
+        setTimeout(() => attemptPlay('load-2000ms'), 2000);
+        setTimeout(() => attemptPlay('load-4000ms'), 4000);
     });
 
-    // Step 6: Aggressive fallback - play on ANY user interaction
-    const forcePlay = () => attemptPlay('user-interaction');
-    ['touchstart', 'touchend', 'click', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
-        document.addEventListener(evt, forcePlay, { passive: true, once: false });
-    });
-
-    // Step 7: Resume when page becomes visible again
+    // 5️⃣ محاولة عند تغيير حالة الصفحة
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) {
             attemptPlay('visibility-return');
@@ -547,44 +551,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Step 8: Resume on window focus
+    // 6️⃣ محاولة عند عودة التركيز
     window.addEventListener('focus', () => attemptPlay('window-focus'));
     window.addEventListener('pageshow', () => attemptPlay('pageshow'));
 
-    // Step 9: Play when video scrolls into viewport
+    // 7️⃣ محاولة عند دخول الفيديو في الشاشة
     if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    attemptPlay('intersection-visible');
+                    attemptPlay('intersection');
                 }
             });
         }, { threshold: 0.1 });
         io.observe(video);
     }
 
-    // Step 10: Handle network issues
+    // 8️⃣ Fallback: عند أي تفاعل
+    ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(evt => {
+        document.addEventListener(evt, () => attemptPlay('user-interaction'), { passive: true });
+    });
+
+    // 9️⃣ مراقبة التوقف المفاجئ
+    video.addEventListener('pause', () => {
+        setTimeout(() => {
+            if (!document.hidden) attemptPlay('resume-after-pause');
+        }, 100);
+    });
+
+    // 🔟 معالجة أخطاء الشبكة
     video.addEventListener('stalled', () => {
-        console.log('📡 Video stalled, reloading...');
+        console.log('📡 Video stalled, retrying...');
         video.load();
         setTimeout(() => attemptPlay('stalled-recovery'), 500);
     });
 
-    video.addEventListener('suspend', () => {
-        setTimeout(() => attemptPlay('suspend-retry'), 800);
+    video.addEventListener('error', (e) => {
+        console.warn('⚠️ Video error:', e);
     });
 
-    // Step 11: Periodic check for first 10 seconds
-    let checks = 0;
-    const interval = setInterval(() => {
-        if (!video.paused && !video.ended && video.readyState > 2) {
-            clearInterval(interval);
-            return;
-        }
-        attemptPlay('periodic-' + checks);
-        checks++;
-        if (checks >= 5) clearInterval(interval);
-    }, 2000);
-
-    console.log('🎬 Aggressive video autoplay initialized');
+    console.log('🎬 Autoplay handler initialized');
 })();
