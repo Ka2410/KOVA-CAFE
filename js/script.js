@@ -1,9 +1,10 @@
 /* ============================================================
-   KOVA CAFÉ - FULL INTERACTIONS v3.1
+   KOVA CAFÉ - FULL INTERACTIONS v4.1
+   6 Sections: Hero · About · Gallery · Menu Card · Reservation · Footer
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 KOVA Script Loaded');
+    console.log('🚀 KOVA Script v4.1 Loaded');
 
     /* ==================== BODY REFERENCE ==================== */
     const body = document.body;
@@ -55,14 +56,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==================== MENU TABS ==================== */
+    /* ==================== MENU TABS (with Menu Card label) ==================== */
     const tabButtons = document.querySelectorAll('.tab-btn');
     const menuPanels = document.querySelectorAll('.menu-panel');
+    const menuCategoryLabel = document.getElementById('menuCategoryLabel');
 
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
+            // Deactivate all
             tabButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
+            
+            // Update category label with fade
+            if (menuCategoryLabel) {
+                menuCategoryLabel.style.opacity = '0';
+                setTimeout(() => {
+                    menuCategoryLabel.textContent = button.textContent.trim();
+                    menuCategoryLabel.style.opacity = '0.95';
+                }, 200);
+            }
+            
+            // Switch panel
             menuPanels.forEach(panel => panel.classList.remove('active'));
             const targetId = button.getAttribute('data-target');
             const targetPanel = document.getElementById(targetId);
@@ -155,16 +169,25 @@ document.addEventListener('DOMContentLoaded', () => {
             btnPrimary: 'Reserve a Table', btnSecondary: 'Our Story',
             scrollIndicator: 'Scroll to Explore',
             reserve: 'Reserve',
-            experienceTitle: 'The KOVA Experience',
+            trustReviews: '4.9 · 200+ Reviews',
+            trustAward: 'Best Coffee Cairo 2024',
+            aboutEyebrow: 'ABOUT KOVA',
+            aboutTitle: 'More Than Coffee.<br>It\'s a Feeling.',
+            aboutSubtitle: 'KOVA — Kick, Open, Vibe, Atmosphere',
+            discoverMeaning: 'Discover The Meaning →',
+            galleryTitle: 'The KOVA Gallery',
+            gallerySubtitle: 'A glimpse into the KOVA experience',
+            galleryAll: 'All', galleryCoffee: 'Coffee', galleryInterior: 'Interior', galleryBrand: 'Brand',
+            galleryCaptions: [
+                'Welcome to KOVA',
+                'Evening Ambience',
+                'Sip The Feeling',
+                'Signature Latte',
+                'Our Menu',
+                'Every Table Tells a Tale'
+            ],
             ourMenu: 'Our Menu',
             coffee: 'COFFEE', nonCoffee: 'NON COFFEE', desserts: 'DESSERTS',
-            moreThanCoffee: 'More Than Coffee.<br>It\'s a Feeling.',
-            kovaMeaning: 'KOVA — Kick, Open, Vibe, Atmosphere.',
-            gallerySubtitle: 'A glimpse into the KOVA experience',
-            galleryAll: 'All', galleryInterior: 'Interior', galleryCoffee: 'Coffee', galleryFood: 'Food',
-            reviewsTitle: 'What Our Guests Say',
-            reviewsSubtitle: 'Real experiences from real people',
-            faqTitle: 'Frequently Asked Questions',
             reservationEyebrow: 'RESERVATION',
             reservationTitle: 'Book Your Table',
             reservationSubtitle: "Reserve your spot at KOVA CAFÉ. We'll have everything ready for you.",
@@ -175,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formNotes: 'Add Special Requests',
             formSubmit: 'Confirm Reservation',
             formFootnote: "By reserving, you agree to our reservation policy. We'll send you a confirmation on WhatsApp.",
+            faqTitle: 'Frequently Asked Questions',
             toastTitle: 'Reservation Confirmed',
             toastMessage: "We'll send you a confirmation on WhatsApp shortly.",
             newsletterTitle: 'Subscribed',
@@ -191,16 +215,25 @@ document.addEventListener('DOMContentLoaded', () => {
             btnPrimary: 'احجز طاولة', btnSecondary: 'قصتنا',
             scrollIndicator: 'مرر للأسفل',
             reserve: 'احجز',
-            experienceTitle: 'تجربة كوفا',
+            trustReviews: '٤.٩ · أكثر من ٢٠٠ تقييم',
+            trustAward: 'أفضل قهوة في القاهرة ٢٠٢٤',
+            aboutEyebrow: 'عن كوفا',
+            aboutTitle: 'أكثر من قهوة.<br>إنه إحساس.',
+            aboutSubtitle: 'كوفا — انطلق، افتح، استمتع، أجواء',
+            discoverMeaning: 'اكتشف المعنى ←',
+            galleryTitle: 'معرض كوفا',
+            gallerySubtitle: 'لمحة من تجربة كوفا',
+            galleryAll: 'الكل', galleryCoffee: 'قهوة', galleryInterior: 'المكان', galleryBrand: 'البراند',
+            galleryCaptions: [
+                'أهلاً بك في كوفا',
+                'أجواء المساء',
+                'ارتشف الإحساس',
+                'اللاتيه المميز',
+                'قائمتنا',
+                'كل طاولة تحكي حكاية'
+            ],
             ourMenu: 'قائمتنا',
             coffee: 'قهوة', nonCoffee: 'مش قهوة', desserts: 'حلويات',
-            moreThanCoffee: 'أكثر من قهوة.<br>إنه إحساس.',
-            kovaMeaning: 'كوفا — انطلق، افتح، استمتع، أجواء.',
-            gallerySubtitle: 'لمحة من تجربة كوفا',
-            galleryAll: 'الكل', galleryInterior: 'المكان', galleryCoffee: 'قهوة', galleryFood: 'أكل',
-            reviewsTitle: 'ماذا يقول ضيوفنا',
-            reviewsSubtitle: 'تجارب حقيقية من أشخاص حقيقيين',
-            faqTitle: 'الأسئلة الشائعة',
             reservationEyebrow: 'الحجز',
             reservationTitle: 'احجز طاولتك',
             reservationSubtitle: 'احجز مكانك في كوفا كافيه. هنكون جاهزين لاستقبالك.',
@@ -211,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formNotes: 'إضافة طلبات خاصة',
             formSubmit: 'تأكيد الحجز',
             formFootnote: 'بالحجز، أنت توافق على سياسة الحجز. هنبعتلك تأكيد على الواتساب.',
+            faqTitle: 'الأسئلة الشائعة',
             toastTitle: 'تم الحجز بنجاح',
             toastMessage: 'هنبعتلك تأكيد على الواتساب قريباً.',
             newsletterTitle: 'تم الاشتراك',
@@ -277,24 +311,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const ss = document.querySelector('.scroll-indicator span');
         if (ss) ss.textContent = t.scrollIndicator;
 
+        // Trust Bar
+        const trustTexts = document.querySelectorAll('.trust-text');
+        if (trustTexts[0]) trustTexts[0].textContent = t.trustReviews;
+        if (trustTexts[1]) trustTexts[1].textContent = t.trustAward;
+
         document.querySelectorAll('.btn-reserve').forEach(btn => btn.textContent = t.reserve);
         const sticky = document.querySelector('.sticky-reserve');
         if (sticky) sticky.textContent = t.reserve;
 
-        // Brand Story
-        const bh = document.querySelector('.brand-story h2');
-        if (bh) bh.innerHTML = t.moreThanCoffee;
-        const bp2 = document.querySelector('.brand-story p');
-        if (bp2) bp2.textContent = t.kovaMeaning;
+        // About Section
+        const aboutEyebrow = document.querySelector('.about-section .section-eyebrow');
+        if (aboutEyebrow) aboutEyebrow.textContent = t.aboutEyebrow;
+        const aboutTitle = document.querySelector('.about-title');
+        if (aboutTitle) aboutTitle.innerHTML = t.aboutTitle;
+        const aboutSub = document.querySelector('.about-subtitle');
+        if (aboutSub) aboutSub.textContent = t.aboutSubtitle;
+        const btnStory = document.querySelector('.btn-story');
+        if (btnStory) btnStory.textContent = t.discoverMeaning;
 
         // Gallery
+        const gt = document.querySelector('.gallery-section .section-title');
+        if (gt) gt.textContent = t.galleryTitle;
         const gs = document.querySelector('.gallery-subtitle');
         if (gs) gs.textContent = t.gallerySubtitle;
         const gf = document.querySelectorAll('.gallery-filter');
         if (gf[0]) gf[0].textContent = t.galleryAll;
-        if (gf[1]) gf[1].textContent = t.galleryInterior;
-        if (gf[2]) gf[2].textContent = t.galleryCoffee;
-        if (gf[3]) gf[3].textContent = t.galleryFood;
+        if (gf[1]) gf[1].textContent = t.galleryCoffee;
+        if (gf[2]) gf[2].textContent = t.galleryInterior;
+        if (gf[3]) gf[3].textContent = t.galleryBrand;
+
+        const captions = document.querySelectorAll('.gallery-caption');
+        if (t.galleryCaptions) {
+            captions.forEach((cap, i) => {
+                if (t.galleryCaptions[i]) cap.textContent = t.galleryCaptions[i];
+            });
+        }
 
         // Menu
         const mt = document.querySelector('.menu-section .section-title');
@@ -304,11 +356,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tb[1]) tb[1].textContent = t.nonCoffee;
         if (tb[2]) tb[2].textContent = t.desserts;
 
-        // Reviews
-        const rt = document.querySelector('.reviews-section .section-title');
-        if (rt) rt.textContent = t.reviewsTitle;
-        const rsub = document.querySelector('.reviews-subtitle');
-        if (rsub) rsub.textContent = t.reviewsSubtitle;
+        // Update menu category label
+        const activeTab = document.querySelector('.tab-btn.active');
+        const label = document.getElementById('menuCategoryLabel');
+        if (activeTab && label) {
+            label.textContent = activeTab.textContent.trim();
+        }
 
         // Reservation
         const re = document.querySelector('.reservation-section .section-eyebrow');
@@ -333,8 +386,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fn) fn.textContent = t.formFootnote;
 
         // FAQ
-        const ft2 = document.querySelector('.faq-section .section-title');
-        if (ft2) ft2.textContent = t.faqTitle;
+        const faqTitle = document.querySelector('.faq-inline-title');
+        if (faqTitle) faqTitle.textContent = t.faqTitle;
 
         updateGreeting(lang);
         updateOpenStatus(lang);
@@ -424,9 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const item = btn.closest('.faq-item');
             const isActive = item.classList.contains('active');
-            
             document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
-            
             if (!isActive) item.classList.add('active');
         });
     });
@@ -681,24 +732,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /* ==================== QUOTE TICKER ==================== */
-    const quotesEn = ["More than coffee. It's a feeling.", "Where time slows down.", "Your table is waiting.", "Kick. Open. Vibe. Atmosphere.", "Good coffee. Better days."];
-    const quotesAr = ['أكثر من مجرد قهوة. إنه إحساس.', 'حيث يتوقف الزمن.', 'طاولتك تنتظرك.', 'انطلق. افتح. استمتع. تجربة.', 'قهوة ممتازة. أيام أفضل.'];
-    const quoteText = document.getElementById('quoteTicker');
-    let quoteIndex = 0;
-
-    if (quoteText) {
-        setInterval(() => {
-            quoteText.classList.add('fading');
-            setTimeout(() => {
-                const q = currentLang === 'ar' ? quotesAr : quotesEn;
-                quoteIndex = (quoteIndex + 1) % q.length;
-                quoteText.textContent = q[quoteIndex];
-                quoteText.classList.remove('fading');
-            }, 500);
-        }, 4500);
-    }
-
     console.log('✅ All KOVA interactions initialized');
 });
 
@@ -729,7 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 if (!hasPlayed) { hasPlayed = true; console.log(`✅ Video autoplay (${source})`); }
-            }).catch((err) => {
+            }).catch(() => {
                 setTimeout(() => attemptPlay(source + '-retry'), 300);
             });
         }

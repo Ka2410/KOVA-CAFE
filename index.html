@@ -79,7 +79,6 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#menu">Menu</a></li>
-                <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#reservation">Reserve</a></li>
                 <li class="mobile-lang-item">
                     <button class="lang-toggle-mobile" id="langToggleMobile">
@@ -103,6 +102,7 @@
         </div>
     </header>
 
+    <!-- 1. HERO -->
     <section class="hero" id="home">
         <video class="hero-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="assets/images/hero-poster.jpg" disablepictureinpicture disableremoteplayback x5-playsinline>
             <source src="assets/video/hero-video.mp4" type="video/mp4">
@@ -135,8 +135,15 @@
                 <button id="openMeaningModalMobile" class="btn-text-link mobile-only">Our Story →</button>
             </div>
 
-            <div class="quote-ticker desktop-only">
-                <span class="quote-text" id="quoteTicker">More than coffee. It's a feeling.</span>
+            <div class="trust-bar">
+                <div class="trust-item">
+                    <span class="trust-stars">★★★★★</span>
+                    <span class="trust-text">4.9 · 200+ Reviews</span>
+                </div>
+                <span class="trust-divider">·</span>
+                <div class="trust-item">
+                    <span class="trust-text">Best Coffee Cairo 2024</span>
+                </div>
             </div>
         </div>
 
@@ -148,70 +155,92 @@
         </div>
     </section>
 
-    <section class="brand-story" id="about">
-        <div class="reveal">
-            <span class="section-eyebrow">ABOUT KOVA</span>
-            <h2>More Than Coffee.<br>It's a Feeling.</h2>
-            <p>KOVA — Kick, Open, Vibe, Atmosphere.</p>
-            <button class="btn-story" id="openMeaningModalStory">Discover The Meaning →</button>
+    <!-- 2. ABOUT KOVA -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <span class="section-eyebrow reveal">ABOUT KOVA</span>
+            <h2 class="about-title reveal">More Than Coffee.<br>It's a Feeling.</h2>
+            <p class="about-subtitle reveal">KOVA — Kick, Open, Vibe, Atmosphere</p>
+
+            <div class="meaning-grid reveal">
+                <div class="meaning-mini-card">
+                    <span class="mini-letter">K</span>
+                    <span class="mini-word-en">KICK</span>
+                    <span class="mini-word-ar">رَكْلَة</span>
+                </div>
+                <div class="meaning-mini-card">
+                    <span class="mini-letter">O</span>
+                    <span class="mini-word-en">OPEN</span>
+                    <span class="mini-word-ar">مَفْتُوح</span>
+                </div>
+                <div class="meaning-mini-card">
+                    <span class="mini-letter">V</span>
+                    <span class="mini-word-en">VIBE</span>
+                    <span class="mini-word-ar">جَوّ</span>
+                </div>
+                <div class="meaning-mini-card">
+                    <span class="mini-letter">A</span>
+                    <span class="mini-word-en">ATMOSPHERE</span>
+                    <span class="mini-word-ar">الأَجْوَاء</span>
+                </div>
+            </div>
+
+            <button class="btn-story reveal" id="openMeaningModalStory">Discover The Meaning →</button>
         </div>
     </section>
 
+    <!-- 3. GALLERY -->
     <section class="gallery-section" id="gallery">
         <h2 class="section-title reveal">The KOVA Gallery</h2>
         <p class="gallery-subtitle reveal">A glimpse into the KOVA experience</p>
         
         <div class="gallery-filters reveal">
             <button class="gallery-filter active" data-filter="all">All</button>
-            <button class="gallery-filter" data-filter="interior">Interior</button>
             <button class="gallery-filter" data-filter="coffee">Coffee</button>
-            <button class="gallery-filter" data-filter="food">Food</button>
+            <button class="gallery-filter" data-filter="interior">Interior</button>
+            <button class="gallery-filter" data-filter="brand">Brand</button>
         </div>
 
         <div class="gallery-grid reveal">
-            <div class="gallery-item tall" data-category="interior" data-src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800&auto=format&fit=crop" alt="KOVA Interior" loading="lazy">
+            <div class="gallery-item tall" data-category="interior" data-src="assets/images/gallery/gallery-3.jpg">
+                <img src="assets/images/gallery/gallery-3.jpg" alt="Welcome to KOVA" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-                <span class="gallery-caption">The Writer's Nook</span>
+                <span class="gallery-caption">Welcome to KOVA</span>
             </div>
-            <div class="gallery-item" data-category="coffee" data-src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop" alt="Espresso" loading="lazy">
-                <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-                <span class="gallery-caption">Signature Espresso</span>
-            </div>
-            <div class="gallery-item" data-category="interior" data-src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop" alt="Ambiance" loading="lazy">
+
+            <div class="gallery-item wide" data-category="interior" data-src="assets/images/gallery/gallery-4.jpg">
+                <img src="assets/images/gallery/gallery-4.jpg" alt="KOVA Interior" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
                 <span class="gallery-caption">Evening Ambience</span>
             </div>
-            <div class="gallery-item wide" data-category="interior" data-src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=800&auto=format&fit=crop" alt="Counter" loading="lazy">
+
+            <div class="gallery-item" data-category="coffee" data-src="assets/images/gallery/gallery-5.jpg">
+                <img src="assets/images/gallery/gallery-5.jpg" alt="Sip The Feeling" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-                <span class="gallery-caption">The Bar</span>
+                <span class="gallery-caption">Sip The Feeling</span>
             </div>
-            <div class="gallery-item" data-category="coffee" data-src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop" alt="Latte Art" loading="lazy">
+
+            <div class="gallery-item" data-category="coffee" data-src="assets/images/gallery/gallery-8.jpg">
+                <img src="assets/images/gallery/gallery-8.jpg" alt="Signature Latte" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-                <span class="gallery-caption">Latte Art</span>
+                <span class="gallery-caption">Signature Latte</span>
             </div>
-            <div class="gallery-item tall" data-category="food" data-src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=800&auto=format&fit=crop" alt="Desserts" loading="lazy">
+
+            <div class="gallery-item" data-category="brand" data-src="assets/images/gallery/gallery-6.jpg">
+                <img src="assets/images/gallery/gallery-6.jpg" alt="Our Menu" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-                <span class="gallery-caption">Sweet Indulgence</span>
+                <span class="gallery-caption">Our Menu</span>
             </div>
-            <div class="gallery-item" data-category="coffee" data-src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800&auto=format&fit=crop" alt="Barista" loading="lazy">
+
+            <div class="gallery-item wide" data-category="interior" data-src="assets/images/gallery/gallery-10.jpg">
+                <img src="assets/images/gallery/gallery-10.jpg" alt="Every Table Tells a Tale" loading="lazy">
                 <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-                <span class="gallery-caption">Crafted with Love</span>
-            </div>
-            <div class="gallery-item" data-category="food" data-src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop" alt="Coffee" loading="lazy">
-                <div class="gallery-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-                <span class="gallery-caption">Morning Ritual</span>
+                <span class="gallery-caption">Every Table Tells a Tale</span>
             </div>
         </div>
     </section>
 
+    <!-- 4. MENU -->
     <section class="menu-section" id="menu">
         <h2 class="section-title reveal">Our Menu</h2>
         <div class="menu-tabs reveal">
@@ -220,6 +249,9 @@
             <button class="tab-btn" data-target="desserts">DESSERTS</button>
         </div>
         <div class="menu-container reveal">
+            <div class="menu-emblem">K</div>
+            <span class="menu-category-label" id="menuCategoryLabel">COFFEE</span>
+
             <div class="menu-panel active" id="coffee">
                 <div class="menu-category">
                     <div class="menu-item">
@@ -229,22 +261,6 @@
                             <span class="menu-item-desc">Rich, bold single shot</span>
                         </div>
                         <span class="menu-item-price">70 <small>EGP</small></span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=200&auto=format&fit=crop" alt="Americano" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Americano</span>
-                            <span class="menu-item-desc">Smooth espresso + hot water</span>
-                        </div>
-                        <span class="menu-item-price">80 <small>EGP</small></span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=200&auto=format&fit=crop" alt="Cappuccino" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Cappuccino</span>
-                            <span class="menu-item-desc">Espresso + steamed milk foam</span>
-                        </div>
-                        <span class="menu-item-price">95 <small>EGP</small></span>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=200&auto=format&fit=crop" alt="Latte" loading="lazy"></div>
@@ -263,22 +279,6 @@
                         <span class="menu-item-price">115 <small>EGP</small></span>
                     </div>
                     <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=200&auto=format&fit=crop" alt="Mocha" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Mocha</span>
-                            <span class="menu-item-desc">Espresso + chocolate + milk</span>
-                        </div>
-                        <span class="menu-item-price">120 <small>EGP</small></span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=200&auto=format&fit=crop" alt="Flat White" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Flat White</span>
-                            <span class="menu-item-desc">Double espresso + microfoam</span>
-                        </div>
-                        <span class="menu-item-price">105 <small>EGP</small></span>
-                    </div>
-                    <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=200&auto=format&fit=crop" alt="Cold Brew" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Cold Brew <span class="badge-new">New</span></span>
@@ -288,6 +288,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="menu-panel" id="non-coffee">
                 <div class="menu-category">
                     <div class="menu-item">
@@ -307,14 +308,6 @@
                         <span class="menu-item-price">100 <small>EGP</small></span>
                     </div>
                     <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?q=80&w=200&auto=format&fit=crop" alt="Iced Chocolate" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Iced Chocolate</span>
-                            <span class="menu-item-desc">Chilled chocolate perfection</span>
-                        </div>
-                        <span class="menu-item-price">90 <small>EGP</small></span>
-                    </div>
-                    <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1572286258217-215b30f1b7f5?q=80&w=200&auto=format&fit=crop" alt="Red Velvet" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Red Velvet Latte</span>
@@ -330,16 +323,9 @@
                         </div>
                         <span class="menu-item-price">85 <small>EGP</small></span>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?q=80&w=200&auto=format&fit=crop" alt="Smoothie" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Berry Smoothie</span>
-                            <span class="menu-item-desc">Mixed berries + yogurt</span>
-                        </div>
-                        <span class="menu-item-price">95 <small>EGP</small></span>
-                    </div>
                 </div>
             </div>
+
             <div class="menu-panel" id="desserts">
                 <div class="menu-category">
                     <div class="menu-item">
@@ -359,28 +345,12 @@
                         <span class="menu-item-price">130 <small>EGP</small></span>
                     </div>
                     <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=200&auto=format&fit=crop" alt="Biscoff" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Biscoff Cheesecake</span>
-                            <span class="menu-item-desc">Caramelized biscuit layers</span>
-                        </div>
-                        <span class="menu-item-price">130 <small>EGP</small></span>
-                    </div>
-                    <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=200&auto=format&fit=crop" alt="Tiramisu" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-item-name">Tiramisu</span>
                             <span class="menu-item-desc">Italian classic with espresso</span>
                         </div>
                         <span class="menu-item-price">135 <small>EGP</small></span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?q=80&w=200&auto=format&fit=crop" alt="Crème Brûlée" loading="lazy"></div>
-                        <div class="menu-info">
-                            <span class="menu-item-name">Crème Brûlée</span>
-                            <span class="menu-item-desc">French vanilla custard</span>
-                        </div>
-                        <span class="menu-item-price">125 <small>EGP</small></span>
                     </div>
                     <div class="menu-item">
                         <div class="menu-thumb"><img src="https://images.unsplash.com/photo-1607920592519-bab2a80efd55?q=80&w=200&auto=format&fit=crop" alt="Brownie" loading="lazy"></div>
@@ -395,47 +365,7 @@
         </div>
     </section>
 
-    <section class="reviews-section" id="reviews">
-        <h2 class="section-title reveal">What Our Guests Say</h2>
-        <p class="reviews-subtitle reveal">Real experiences from real people</p>
-
-        <div class="reviews-grid reveal">
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <p class="review-text">"The best coffee experience in Cairo. The atmosphere is unmatched, and the staff treats you like family. A true gem."</p>
-                <div class="review-author">
-                    <div class="review-avatar">A</div>
-                    <div>
-                        <span class="review-name">Ahmed M.</span>
-                        <span class="review-role">Regular Guest</span>
-                    </div>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <p class="review-text">"KOVA isn't just a cafe, it's an escape. Perfect for remote work, meetings, or just enjoying a quiet moment."</p>
-                <div class="review-author">
-                    <div class="review-avatar">S</div>
-                    <div>
-                        <span class="review-name">Sarah K.</span>
-                        <span class="review-role">Entrepreneur</span>
-                    </div>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <p class="review-text">"From the moment you walk in, you feel the difference. Premium quality, attention to detail, and unforgettable vibes."</p>
-                <div class="review-author">
-                    <div class="review-avatar">M</div>
-                    <div>
-                        <span class="review-name">Mohamed R.</span>
-                        <span class="review-role">Coffee Enthusiast</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- 5. RESERVATION + FAQ -->
     <section class="reservation-section" id="reservation">
         <div class="reservation-container">
             <div class="reservation-header reveal">
@@ -521,75 +451,55 @@
 
                 <p class="form-footnote">By reserving, you agree to our reservation policy. We'll send you a confirmation on WhatsApp.</p>
             </form>
-        </div>
-    </section>
 
-    <section class="faq-section" id="faq">
-        <h2 class="section-title reveal">Frequently Asked Questions</h2>
+            <div class="faq-inline reveal">
+                <h3 class="faq-inline-title">Frequently Asked Questions</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do I need a reservation?</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Walk-ins are always welcome, but we recommend reserving to guarantee your preferred seat, especially on weekends and evenings.</p>
+                        </div>
+                    </div>
 
-        <div class="faq-grid reveal">
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Do I need a reservation?</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Walk-ins are always welcome, but we recommend reserving to guarantee your preferred seat, especially on weekends and evenings.</p>
-                </div>
-            </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is there WiFi and power outlets?</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! High-speed WiFi and power outlets are available at most tables. Perfect for remote work and study sessions.</p>
+                        </div>
+                    </div>
 
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Is there WiFi and power outlets?</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Yes! High-speed WiFi and power outlets are available at most tables. Perfect for remote work and study sessions.</p>
-                </div>
-            </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I book for private events?</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely. We offer private event bookings for birthdays, corporate meetings, and special occasions. Contact us for details.</p>
+                        </div>
+                    </div>
 
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Do you have parking?</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Valet parking is available in the evenings. Street parking is usually available nearby during the day.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Can I book the space for private events?</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Absolutely. We offer private event bookings for birthdays, corporate meetings, and special occasions. Contact us for details.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Do you serve vegan / dairy-free options?</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Yes, we offer oat milk, almond milk, and soy milk alternatives at no extra charge. Several desserts are also vegan-friendly.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>What are your peak hours?</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Our busiest times are Thursday–Saturday evenings (7 PM–11 PM). For a quieter experience, we recommend weekday mornings.</p>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What are your peak hours?</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Our busiest times are Thursday–Saturday evenings (7 PM–11 PM). For a quieter experience, we recommend weekday mornings.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 6. FOOTER -->
     <footer id="location">
         <div class="footer-grid">
             <div class="footer-brand">
@@ -637,8 +547,7 @@
                     <li><a href="#menu">Menu</a></li>
                     <li><a href="#reservation">Reservations</a></li>
                     <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#reviews">Reviews</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#about">About</a></li>
                 </ul>
             </div>
             
@@ -673,11 +582,15 @@
         
         <div class="footer-bottom">
             <p class="copyright">&copy; 2024 KOVA CAFÉ. All rights reserved.</p>
-            <p class="footer-credit">Made with ♥ in Cairo</p>
+            <p class="footer-credit">
+                Made with ♥ by 
+                <a href="https://wa.me/201211659075" target="_blank" rel="noopener">Karam</a> 
+                · 
+                <a href="https://instagram.com/ka__2410" target="_blank" rel="noopener">@ka__2410</a>
+            </p>
         </div>
     </footer>
 
-    <!-- SOUND FLOATING BUTTON -->
     <button class="sound-float" id="soundToggle" aria-label="Toggle ambient sound">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M11 5L6 9H2v6h4l5 4V5z"/>
@@ -685,15 +598,13 @@
         </svg>
     </button>
 
-    <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="#" class="whatsapp-float" id="whatsappFloat" aria-label="Contact us on WhatsApp">
+    <a href="https://wa.me/201211659075" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contact us on WhatsApp">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
         </svg>
         <span class="whatsapp-tooltip">Chat with us</span>
     </a>
 
-    <!-- MEANING MODAL -->
     <div class="meaning-modal" id="meaningModal" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="modal-backdrop" data-close></div>
         <div class="modal-content">
@@ -744,7 +655,6 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
         <button class="lightbox-close" aria-label="Close">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -760,7 +670,6 @@
         </button>
     </div>
 
-    <!-- TOAST -->
     <div class="toast" id="toast">
         <svg class="toast-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20 6L9 17l-5-5"/>
