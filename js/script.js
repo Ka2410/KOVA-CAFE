@@ -185,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function setLanguage(lang) {
-        console.log('🌐 Setting language to:', lang);
         currentLang = lang;
         const t = translations[lang];
 
@@ -470,36 +469,122 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4500);
     }
 
-    /* ==================== VIDEO PERFORMANCE ==================== */
-    document.addEventListener('visibilitychange', () => {
-        const video = document.querySelector('.hero-video');
-        if (!video) return;
-        if (document.hidden) video.pause();
-        else video.play().catch(() => {});
-    });
+    console.log('✅ All KOVA interactions initialized');
+});
 
-    /* ==================== FORCE VIDEO AUTOPLAY (ALL DEVICES) ==================== */
-    const heroVideo = document.querySelector('.hero-video');
-    if (heroVideo) {
-        heroVideo.muted = true;
-        heroVideo.playsInline = true;
-        heroVideo.setAttribute('playsinline', '');
-        heroVideo.setAttribute('webkit-playsinline', '');
-        
-        const playPromise = heroVideo.play();
+
+/* ============================================================
+   🎬 AGGRESSIVE VIDEO AUTOPLAY - MOBILE FIRST
+   Runs OUTSIDE DOMContentLoaded to catch the video ASAP
+   ============================================================ */
+(function initHeroVideo() {
+    const video = document.querySelector('.hero-video');
+    if (!video) {
+        console.warn('⚠️ Hero video not found');
+        return;
+    }
+
+    // Step 1: Set critical attributes IMMEDIATELY
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('x5-playsinline', '');
+
+    let hasPlayed = false;
+    let attempts = 0;
+
+    // Step 2: Attempt to play with retries
+    function attemptPlay(source = 'unknown') {
+        if (hasPlayed && !video.paused) return;
+        if (attempts > 20) return;
+        attempts++;
+
+        const playPromise = video.play();
         if (playPromise !== undefined) {
-            playPromise.catch(() => {
-                // لو iOS منع التشغيل، شغله عند أول لمسة
-                const playOnTouch = () => {
-                    heroVideo.play().catch(() => {});
-                    document.removeEventListener('touchstart', playOnTouch);
-                    document.removeEventListener('click', playOnTouch);
-                };
-                document.addEventListener('touchstart', playOnTouch, { once: true });
-                document.addEventListener('click', playOnTouch, { once: true });
-            });
+            playPromise
+                .then(() => {
+                    hasPlayed = true;
+                    console.log(`✅ Video playing (triggered by: ${source})`);
+                })
+                .catch((error) => {
+                    console.log(`⏸️ Video blocked (${source}):`, error.name);
+                    setTimeout(() => attemptPlay(source + '-retry'), 400);
+                });
         }
     }
 
-    console.log('✅ All KOVA interactions initialized');
-});
+    // Step 3: Try immediately
+    attemptPlay('init');
+
+    // Step 4: Try on every possible load event
+    ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough', 'playing'].forEach(evt => {
+        video.addEventListener(evt, () => attemptPlay(evt), { once: true });
+    });
+
+    // Step 5: Try after page fully loads
+    window.addEventListener('load', () => {
+        attemptPlay('window-load');
+        setTimeout(() => attemptPlay('load-delay-300'), 300);
+        setTimeout(() => attemptPlay('load-delay-1000'), 1000);
+        setTimeout(() => attemptPlay('load-delay-2500'), 2500);
+    });
+
+    // Step 6: Aggressive fallback - play on ANY user interaction
+    const forcePlay = () => attemptPlay('user-interaction');
+    ['touchstart', 'touchend', 'click', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
+        document.addEventListener(evt, forcePlay, { passive: true, once: false });
+    });
+
+    // Step 7: Resume when page becomes visible again
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            attemptPlay('visibility-return');
+        } else {
+            video.pause();
+        }
+    });
+
+    // Step 8: Resume on window focus
+    window.addEventListener('focus', () => attemptPlay('window-focus'));
+    window.addEventListener('pageshow', () => attemptPlay('pageshow'));
+
+    // Step 9: Play when video scrolls into viewport
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    attemptPlay('intersection-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        io.observe(video);
+    }
+
+    // Step 10: Handle network issues
+    video.addEventListener('stalled', () => {
+        console.log('📡 Video stalled, reloading...');
+        video.load();
+        setTimeout(() => attemptPlay('stalled-recovery'), 500);
+    });
+
+    video.addEventListener('suspend', () => {
+        setTimeout(() => attemptPlay('suspend-retry'), 800);
+    });
+
+    // Step 11: Periodic check for first 10 seconds
+    let checks = 0;
+    const interval = setInterval(() => {
+        if (!video.paused && !video.ended && video.readyState > 2) {
+            clearInterval(interval);
+            return;
+        }
+        attemptPlay('periodic-' + checks);
+        checks++;
+        if (checks >= 5) clearInterval(interval);
+    }, 2000);
+
+    console.log('🎬 Aggressive video autoplay initialized');
+})();

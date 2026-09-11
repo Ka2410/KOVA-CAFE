@@ -122,21 +122,76 @@ body.rtl h1, body.rtl h2, body.rtl h3, body.rtl h4 {
     background: var(--gold); margin: 1rem auto 0;
 }
 
-/* ==================== HEADER ==================== */
+/* ==================== HEADER - GLASSMORPHISM ==================== */
 header {
-    position: fixed; top: 0; left: 0;
-    width: 100%; padding: 1.5rem 5%;
-    display: flex; justify-content: space-between;
-    align-items: center; z-index: 1000;
-    transition: var(--transition); background: transparent;
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 3rem);
+    max-width: 1400px;
+    padding: 0.9rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Glass Effect */
+    background: rgba(18, 10, 10, 0.35);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 60px;
+
+    /* Shadow + Inner Light */
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
+
+/* Subtle gradient highlight on top of glass */
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 60px;
+    background: linear-gradient(135deg,
+        rgba(212, 175, 55, 0.06) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(212, 175, 55, 0.03) 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
 header.scrolled {
-    background: rgba(18, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 5%;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    top: 0.5rem;
+    padding: 0.7rem 2rem;
+    background: rgba(18, 10, 10, 0.55);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border-color: rgba(212, 175, 55, 0.25);
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-body.light-mode header.scrolled { background: rgba(245, 239, 230, 0.95); }
+
+/* Light mode glass */
+body.light-mode header {
+    background: rgba(245, 239, 230, 0.55);
+    border-color: rgba(42, 8, 12, 0.15);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+body.light-mode header.scrolled {
+    background: rgba(245, 239, 230, 0.75);
+    border-color: rgba(42, 8, 12, 0.25);
+}
+
 .logo { display: flex; flex-direction: column; align-items: center; line-height: 1; }
 .logo-main {
     font-family: var(--font-serif);
@@ -221,7 +276,7 @@ body.light-mode header.scrolled { background: rgba(245, 239, 230, 0.95); }
     position: relative;
     min-height: 100vh;
     display: flex; align-items: center;
-    padding: 7rem 8% 4rem;
+    padding: 9rem 8% 4rem;
     overflow: hidden;
     background: var(--bg-dark);
 }
@@ -1120,19 +1175,30 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     .desktop-only { display: none !important; }
     .mobile-only { display: block !important; }
 
-    /* ========== Header Simplification ========== */
+    /* ========== GLASS HEADER on Mobile ========== */
     header {
-        padding: 1rem 5%;
+        top: 0.75rem;
+        width: calc(100% - 1.5rem);
+        padding: 0.7rem 1.2rem;
+        border-radius: 50px;
     }
-    header.scrolled { padding: 0.8rem 5%; }
+    
+    header.scrolled {
+        top: 0.4rem;
+        padding: 0.6rem 1.2rem;
+    }
+    
+    header::before {
+        border-radius: 50px;
+    }
+
+    .logo-main { font-size: 1.5rem; letter-spacing: 3px; }
+    .logo-sub { font-size: 0.55rem; letter-spacing: 4px; }
 
     .lang-toggle,
     .btn-reserve { display: none; }
 
     .header-actions { gap: 0; }
-
-    .logo-main { font-size: 1.6rem; letter-spacing: 3px; }
-    .logo-sub { font-size: 0.55rem; letter-spacing: 4px; }
 
     .mobile-lang-item {
         display: block;
@@ -1143,7 +1209,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
 
     /* ========== HERO ========== */
     .hero { 
-        padding: 7rem 6% 3rem; 
+        padding: 8rem 6% 3rem; 
         text-align: center; 
         justify-content: center; 
         min-height: 100vh;
@@ -1153,7 +1219,6 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
         gap: 0;
     }
 
-    /* Video stays visible on mobile */
     .hero-video {
         object-position: center center;
     }
@@ -1286,17 +1351,25 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
     }
     .float-btn svg { width: 15px; height: 15px; }
 
-    /* ========== Nav ========== */
+    /* ========== Nav (Mobile Menu) ========== */
     .nav-links {
-        position: fixed; top: 0; right: -100%;
-        width: 80%; height: 100vh;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
         height: 100dvh;
         background: var(--bg-maroon);
-        flex-direction: column; justify-content: center;
-        align-items: center; transition: var(--transition);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition);
         box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-        z-index: 1000; gap: 1.5rem;
+        z-index: 1000;
+        gap: 1.5rem;
         padding: 2rem;
+        border-radius: 0;
+        margin: 0;
     }
     body.rtl .nav-links { right: auto; left: -100%; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
     .nav-links.active { right: 0; }
@@ -1349,7 +1422,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
 }
 
 @media (max-width: 480px) {
-    .hero { padding-top: 6rem; padding-bottom: 2.5rem; }
+    .hero { padding-top: 7rem; padding-bottom: 2.5rem; }
     .hero-headline { font-size: clamp(2rem, 10vw, 2.4rem); }
     body.rtl .hero-headline { font-size: clamp(1.8rem, 8.5vw, 2.2rem); }
     .hero-eyebrow { font-size: 0.55rem; letter-spacing: 1.5px; }
@@ -1366,7 +1439,7 @@ body.rtl .sticky-reserve { font-family: var(--font-arabic); letter-spacing: 0; r
 
 /* Landscape mobile fix */
 @media (max-width: 900px) and (orientation: landscape) {
-    .hero { min-height: auto; padding: 5rem 6% 2rem; }
+    .hero { min-height: auto; padding: 6rem 6% 2rem; }
     .hero-headline { font-size: 2rem; }
     .hero-subheadline { margin-bottom: 1rem; }
 }
