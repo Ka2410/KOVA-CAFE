@@ -33,6 +33,14 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#location">Location</a></li>
+                <!-- Lang Toggle inside mobile menu -->
+                <li class="mobile-lang-item">
+                    <button class="lang-toggle-mobile" id="langToggleMobile">
+                        <span class="lang-en active">English</span>
+                        <span class="lang-sep">·</span>
+                        <span class="lang-ar">العربية</span>
+                    </button>
+                </li>
             </ul>
         </nav>
         <div class="header-actions">
@@ -49,19 +57,25 @@
     </header>
 
     <section class="hero" id="home">
+        <!-- Video (Desktop only) -->
         <video class="hero-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="assets/images/hero-poster.jpg">
             <source src="assets/video/hero-video.mp4" type="video/mp4">
         </video>
+
+        <!-- Poster Background (Mobile only - replaces video) -->
+        <div class="hero-poster-bg"></div>
 
         <div class="hero-overlay"></div>
         <div class="particles-container" id="particles"></div>
 
         <div class="hero-content">
+            <!-- Combined Meta (one line on mobile) -->
             <div class="hero-meta">
                 <span class="hero-eyebrow" id="timeGreeting">GOOD EVENING · KOVA CAFÉ</span>
+                <span class="meta-divider">·</span>
                 <span class="open-status" id="openStatus">
                     <span class="status-dot"></span>
-                    <span id="statusText">Open Now · Closes 12 AM</span>
+                    <span id="statusText">Open Now</span>
                 </span>
             </div>
 
@@ -70,11 +84,15 @@
                 <span class="line">Better Days</span>
             </h1>
 
-            <p class="hero-subheadline">More than coffee. It's a feeling you'll want to come back to.</p>
+            <!-- Desktop subheadline (long) -->
+            <p class="hero-subheadline desktop-only">More than coffee. It's a feeling you'll want to come back to.</p>
+            <!-- Mobile subheadline (short) -->
+            <p class="hero-subheadline mobile-only">More than coffee. It's a feeling.</p>
 
             <div class="hero-ctas">
                 <a href="#reserve" class="btn-primary magnetic">Reserve a Table</a>
-                <button id="openMeaningModal" class="btn-secondary magnetic">Discover KOVA</button>
+                <button id="openMeaningModal" class="btn-secondary magnetic desktop-only">Discover KOVA</button>
+                <button id="openMeaningModalMobile" class="btn-text-link mobile-only">Discover KOVA →</button>
             </div>
 
             <div class="mini-widget">
@@ -86,7 +104,8 @@
                 <button class="widget-btn">Check Availability →</button>
             </div>
 
-            <div class="quote-ticker">
+            <!-- Desktop only -->
+            <div class="quote-ticker desktop-only">
                 <span class="quote-text" id="quoteTicker">More than coffee. It's a feeling.</span>
             </div>
         </div>
@@ -121,7 +140,8 @@
             </a>
         </div>
 
-        <div class="scroll-indicator">
+        <!-- Desktop only -->
+        <div class="scroll-indicator desktop-only">
             <span>Scroll to Explore</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 5v14M5 12l7 7 7-7"/>
@@ -130,7 +150,7 @@
     </section>
 
     <!-- MEANING MODAL -->
-    <div class="meaning-modal" id="meaningModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="meaning-modal" id="meaningModal" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="modal-backdrop" data-close></div>
         <div class="modal-content">
             <button class="modal-close" data-close aria-label="Close">
@@ -140,7 +160,7 @@
             </button>
 
             <span class="modal-eyebrow">THE MEANING</span>
-            <h2 class="modal-title" id="modalTitle">KOVA</h2>
+            <h2 class="modal-title">KOVA</h2>
             <p class="modal-subtitle">More Than Coffee. It's a Feeling.</p>
 
             <div class="meaning-cards">

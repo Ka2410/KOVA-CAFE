@@ -105,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (lang === 'ar') {
-            timeGreeting.textContent = `${greetingAr} · كوفا كافيه`;
+            timeGreeting.textContent = `${greetingAr} · كوفا`;
             timeGreeting.style.fontFamily = 'var(--font-arabic)';
-            timeGreeting.style.letterSpacing = '1px';
+            timeGreeting.style.letterSpacing = '0.5px';
         } else {
-            timeGreeting.textContent = `${greetingEn} · KOVA CAFÉ`;
+            timeGreeting.textContent = `${greetingEn} · KOVA`;
             timeGreeting.style.fontFamily = '';
             timeGreeting.style.letterSpacing = '';
         }
@@ -128,18 +128,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (lang === 'ar') {
             if (isOpen) {
-                statusText.textContent = 'مفتوح الآن · يغلق 12 ص';
+                statusText.textContent = 'مفتوح الآن';
                 statusDot.classList.remove('closed');
             } else {
-                statusText.textContent = 'مغلق · يفتح 8 ص';
+                statusText.textContent = 'مغلق';
                 statusDot.classList.add('closed');
             }
         } else {
             if (isOpen) {
-                statusText.textContent = 'Open Now · Closes 12 AM';
+                statusText.textContent = 'Open Now';
                 statusDot.classList.remove('closed');
             } else {
-                statusText.textContent = 'Closed · Opens 8 AM';
+                statusText.textContent = 'Closed';
                 statusDot.classList.add('closed');
             }
         }
@@ -147,14 +147,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ==================== LANGUAGE TOGGLE ==================== */
     const langToggle = document.getElementById('langToggle');
+    const langToggleMobile = document.getElementById('langToggleMobile');
     const langEn = langToggle ? langToggle.querySelector('.lang-en') : null;
     const langAr = langToggle ? langToggle.querySelector('.lang-ar') : null;
+    const langEnMobile = langToggleMobile ? langToggleMobile.querySelector('.lang-en') : null;
+    const langArMobile = langToggleMobile ? langToggleMobile.querySelector('.lang-ar') : null;
 
     const translations = {
         en: {
             headlineLine1: 'Good Coffee',
             headlineLine2: 'Better Days',
             subheadline: "More than coffee. It's a feeling you'll want to come back to.",
+            subheadlineMobile: "More than coffee. It's a feeling.",
             btnPrimary: 'Reserve a Table',
             btnSecondary: 'Discover KOVA',
             scrollIndicator: 'Scroll to Explore',
@@ -168,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             headlineLine1: 'قهوة ممتازة',
             headlineLine2: 'أيام أفضل',
             subheadline: 'أكثر من مجرد قهوة. إنه إحساس ستعود إليه دائماً.',
+            subheadlineMobile: 'أكثر من قهوة. إنه إحساس.',
             btnPrimary: 'احجز طاولة',
             btnSecondary: 'اكتشف كوفا',
             scrollIndicator: 'مرر للأسفل',
@@ -190,12 +195,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.setAttribute('dir', 'rtl');
             if (langAr) langAr.classList.add('active');
             if (langEn) langEn.classList.remove('active');
+            if (langArMobile) langArMobile.classList.add('active');
+            if (langEnMobile) langEnMobile.classList.remove('active');
         } else {
             document.body.classList.remove('rtl');
             document.documentElement.setAttribute('lang', 'en');
             document.documentElement.setAttribute('dir', 'ltr');
             if (langEn) langEn.classList.add('active');
             if (langAr) langAr.classList.remove('active');
+            if (langEnMobile) langEnMobile.classList.add('active');
+            if (langArMobile) langArMobile.classList.remove('active');
         }
 
         const headline = document.getElementById('splitHeadline');
@@ -208,13 +217,19 @@ document.addEventListener('DOMContentLoaded', () => {
             splitTextReveal();
         }
 
-        const subheadline = document.querySelector('.hero-subheadline');
-        if (subheadline) subheadline.textContent = t.subheadline;
+        // Desktop subheadline
+        const subheadlineDesktop = document.querySelector('.hero-subheadline.desktop-only');
+        if (subheadlineDesktop) subheadlineDesktop.textContent = t.subheadline;
+        // Mobile subheadline (short)
+        const subheadlineMobile = document.querySelector('.hero-subheadline.mobile-only');
+        if (subheadlineMobile) subheadlineMobile.textContent = t.subheadlineMobile;
 
         const btnPrimary = document.querySelector('.btn-primary');
-        const btnSecondary = document.querySelector('.btn-secondary');
+        const btnSecondaryDesktop = document.querySelector('.btn-secondary.desktop-only');
+        const btnSecondaryMobile = document.querySelector('.btn-text-link.mobile-only');
         if (btnPrimary) btnPrimary.textContent = t.btnPrimary;
-        if (btnSecondary) btnSecondary.textContent = t.btnSecondary;
+        if (btnSecondaryDesktop) btnSecondaryDesktop.textContent = t.btnSecondary;
+        if (btnSecondaryMobile) btnSecondaryMobile.textContent = t.btnSecondary + ' →';
 
         const scrollSpan = document.querySelector('.scroll-indicator span');
         if (scrollSpan) scrollSpan.textContent = t.scrollIndicator;
@@ -227,8 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (widgetValues[1]) widgetValues[1].textContent = t.widgetTime;
         if (widgetBtn) widgetBtn.textContent = t.widgetBtn;
 
-        const reserveBtn = document.querySelector('.btn-reserve');
-        if (reserveBtn) reserveBtn.textContent = t.reserve;
+        const reserveBtns = document.querySelectorAll('.btn-reserve');
+        reserveBtns.forEach(btn => btn.textContent = t.reserve);
 
         const stickyBtn = document.querySelector('.sticky-reserve');
         if (stickyBtn) stickyBtn.textContent = t.reserve;
@@ -238,15 +253,22 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('kova-lang', lang);
     }
 
+    // Desktop lang toggle
     if (langToggle) {
         langToggle.addEventListener('click', (e) => {
             e.preventDefault();
             const newLang = currentLang === 'en' ? 'ar' : 'en';
             setLanguage(newLang);
         });
-        console.log('✅ Language toggle listener attached');
-    } else {
-        console.error('❌ Language toggle button not found!');
+    }
+
+    // Mobile lang toggle
+    if (langToggleMobile) {
+        langToggleMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            setLanguage(newLang);
+        });
     }
 
     const savedLang = localStorage.getItem('kova-lang');
@@ -298,7 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ==================== MEANING MODAL ==================== */
     const meaningModal = document.getElementById('meaningModal');
-    const openModalBtn = document.getElementById('openMeaningModal');
+    const openModalBtnDesktop = document.getElementById('openMeaningModal');
+    const openModalBtnMobile = document.getElementById('openMeaningModalMobile');
     const closeModalBtns = document.querySelectorAll('[data-close]');
 
     function openModal() {
@@ -306,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
         meaningModal.classList.add('active');
         meaningModal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('no-scroll');
-        console.log('📖 Meaning modal opened');
     }
 
     function closeModal() {
@@ -314,22 +336,25 @@ document.addEventListener('DOMContentLoaded', () => {
         meaningModal.classList.remove('active');
         meaningModal.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('no-scroll');
-        console.log('📕 Meaning modal closed');
     }
 
-    if (openModalBtn) {
-        openModalBtn.addEventListener('click', (e) => {
+    if (openModalBtnDesktop) {
+        openModalBtnDesktop.addEventListener('click', (e) => {
             e.preventDefault();
             openModal();
         });
-        console.log('✅ Meaning modal trigger attached');
+    }
+    if (openModalBtnMobile) {
+        openModalBtnMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
     }
 
     closeModalBtns.forEach(btn => {
         btn.addEventListener('click', closeModal);
     });
 
-    // Close on ESC key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && meaningModal && meaningModal.classList.contains('active')) {
             closeModal();
@@ -356,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==================== MAGNETIC BUTTONS ==================== */
+    /* ==================== MAGNETIC BUTTONS (Desktop only) ==================== */
     const magneticButtons = document.querySelectorAll('.magnetic');
     if (window.innerWidth > 768) {
         magneticButtons.forEach(btn => {
@@ -398,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==================== FLOATING PARTICLES ==================== */
+    /* ==================== FLOATING PARTICLES (Desktop only) ==================== */
     const particlesContainer = document.getElementById('particles');
     if (particlesContainer && window.innerWidth > 768) {
         const particleCount = 25;
@@ -419,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.add('light-mode');
     }
 
-    /* ==================== QUOTE TICKER ==================== */
+    /* ==================== QUOTE TICKER (Desktop only) ==================== */
     const quotesEn = [
         "More than coffee. It's a feeling.",
         "Where time slows down.",
@@ -457,9 +482,9 @@ document.addEventListener('DOMContentLoaded', () => {
         else video.play().catch(() => {});
     });
 
-    /* ==================== FORCE VIDEO AUTOPLAY ON MOBILE ==================== */
+    /* ==================== FORCE VIDEO AUTOPLAY (Desktop only) ==================== */
     const heroVideo = document.querySelector('.hero-video');
-    if (heroVideo) {
+    if (heroVideo && window.innerWidth > 768) {
         heroVideo.muted = true;
         heroVideo.playsInline = true;
         heroVideo.setAttribute('playsinline', '');
