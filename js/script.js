@@ -1,9 +1,12 @@
 /* ============================================================
-   KOVA CAFÉ - FULL INTERACTIONS v3.0
+   KOVA CAFÉ - FULL INTERACTIONS v3.1
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 KOVA Script Loaded');
+
+    /* ==================== BODY REFERENCE ==================== */
+    const body = document.body;
 
     /* ==================== SCROLL PROGRESS BAR ==================== */
     const progressBar = document.querySelector('.scroll-progress');
@@ -29,23 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (header) {
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-    }
-
-    /* ==================== THEME TOGGLE ==================== */
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-
-    if (localStorage.getItem('kova-theme') === 'light') {
-        body.classList.add('light-mode');
-    }
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const isLight = body.classList.contains('light-mode');
-            localStorage.setItem('kova-theme', isLight ? 'light' : 'dark');
-            console.log('🎨 Theme:', isLight ? 'Light' : 'Dark');
         });
     }
 
@@ -191,6 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
             formFootnote: "By reserving, you agree to our reservation policy. We'll send you a confirmation on WhatsApp.",
             toastTitle: 'Reservation Confirmed',
             toastMessage: "We'll send you a confirmation on WhatsApp shortly.",
+            newsletterTitle: 'Subscribed',
+            newsletterMessage: 'Thanks for joining!',
             errName: 'Please enter your name',
             errPhone: 'Please enter a valid phone number',
             errDate: 'Please select a date',
@@ -225,6 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
             formFootnote: 'بالحجز، أنت توافق على سياسة الحجز. هنبعتلك تأكيد على الواتساب.',
             toastTitle: 'تم الحجز بنجاح',
             toastMessage: 'هنبعتلك تأكيد على الواتساب قريباً.',
+            newsletterTitle: 'تم الاشتراك',
+            newsletterMessage: 'شكراً لانضمامك!',
             errName: 'الرجاء إدخال الاسم',
             errPhone: 'الرجاء إدخال رقم هاتف صحيح',
             errDate: 'الرجاء اختيار التاريخ',
@@ -351,8 +341,18 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('kova-lang', lang);
     }
 
-    if (langToggle) langToggle.addEventListener('click', (e) => { e.preventDefault(); setLanguage(currentLang === 'en' ? 'ar' : 'en'); });
-    if (langToggleMobile) langToggleMobile.addEventListener('click', (e) => { e.preventDefault(); setLanguage(currentLang === 'en' ? 'ar' : 'en'); });
+    if (langToggle) {
+        langToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            setLanguage(currentLang === 'en' ? 'ar' : 'en');
+        });
+    }
+    if (langToggleMobile) {
+        langToggleMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            setLanguage(currentLang === 'en' ? 'ar' : 'en');
+        });
+    }
 
     const savedLang = localStorage.getItem('kova-lang');
     const browserLang = navigator.language || 'en';
@@ -425,10 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = btn.closest('.faq-item');
             const isActive = item.classList.contains('active');
             
-            // Close all
             document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
             
-            // Toggle current
             if (!isActive) item.classList.add('active');
         });
     });
@@ -544,8 +542,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const toastTitle = document.getElementById('toastTitle');
                 const toastMessage = document.getElementById('toastMessage');
                 
-                if (toastTitle) toastTitle.textContent = isAr ? 'تم الاشتراك' : 'Subscribed';
-                if (toastMessage) toastMessage.textContent = isAr ? 'شكراً لانضمامك!' : 'Thanks for joining!';
+                if (toastTitle) toastTitle.textContent = t.newsletterTitle;
+                if (toastMessage) toastMessage.textContent = t.newsletterMessage;
                 
                 if (toast) {
                     toast.classList.add('visible');

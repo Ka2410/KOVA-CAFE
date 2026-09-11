@@ -24,7 +24,6 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     cursor: default;
-    transition: background-color 0.5s ease, color 0.5s ease;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -37,16 +36,6 @@ img { max-width: 100%; display: block; }
 
 .desktop-only { display: block; }
 .mobile-only { display: none; }
-
-/* ==================== LIGHT MODE ==================== */
-body.light-mode {
-    --bg-dark: #F5EFE6;
-    --bg-maroon: #EDE4D3;
-    --bg-maroon-light: #E8DDC8;
-    --cream: #2A080C;
-    --text-muted: #5A4A3F;
-}
-body.light-mode .grain-overlay { opacity: 0.02; }
 
 /* ==================== SCROLL PROGRESS BAR ==================== */
 .scroll-progress {
@@ -176,12 +165,6 @@ header.scrolled {
     border-color: rgba(212, 175, 55, 0.25);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-body.light-mode header {
-    background: rgba(245, 239, 230, 0.55);
-    border-color: rgba(42, 8, 12, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-body.light-mode header.scrolled { background: rgba(245, 239, 230, 0.75); }
 
 .logo { display: flex; flex-direction: column; align-items: center; line-height: 1; direction: ltr; }
 .logo-main {
@@ -210,26 +193,6 @@ body.rtl .nav-links a { font-family: var(--font-arabic); letter-spacing: 0; text
 .header-actions { display: flex; align-items: center; gap: 0.7rem; }
 
 .mobile-lang-item { display: none; }
-
-/* Theme Toggle */
-.theme-toggle {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: transparent;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    color: var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-.theme-toggle:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
-.theme-toggle svg { position: absolute; transition: var(--transition); }
-.theme-toggle .icon-sun { opacity: 1; transform: rotate(0deg); }
-.theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg); }
-body.light-mode .theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg); }
-body.light-mode .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg); }
 
 .lang-toggle {
     display: flex; align-items: center; gap: 6px;
@@ -802,10 +765,10 @@ body.rtl .tab-btn { font-family: var(--font-arabic); letter-spacing: 0; text-tra
 .menu-panel { display: none; animation: fadeIn 0.5s ease forwards; }
 .menu-panel.active { display: block; }
 .menu-category h3 {
-    display: none; /* Removed since tab already indicates category */
+    display: none;
 }
 
-/* New Menu Item with thumbnail */
+/* Menu Item with thumbnail */
 .menu-item {
     display: flex;
     align-items: center;
@@ -1438,8 +1401,6 @@ body.rtl .footer-col ul li { font-family: var(--font-arabic); }
     transition: var(--transition);
 }
 .footer-map:hover { opacity: 1; filter: grayscale(0.5) invert(0.85) hue-rotate(180deg); }
-body.light-mode .footer-map { filter: grayscale(1); opacity: 0.8; }
-body.light-mode .footer-map:hover { filter: grayscale(0.5); opacity: 1; }
 
 .footer-social {
     display: flex;
@@ -1477,6 +1438,49 @@ body.light-mode .footer-map:hover { filter: grayscale(0.5); opacity: 1; }
 }
 body.rtl .copyright, body.rtl .footer-credit { font-family: var(--font-arabic); }
 .footer-credit { font-style: italic; font-family: var(--font-serif); }
+
+/* ==================== SOUND FLOATING BUTTON ==================== */
+.sound-float {
+    position: fixed;
+    bottom: calc(2rem + 68px);
+    right: 2rem;
+    z-index: 999;
+    width: 48px;
+    height: 48px;
+    background: rgba(18, 10, 10, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+.sound-float:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+}
+.sound-float.active {
+    background: var(--gold);
+    color: var(--bg-dark);
+    animation: soundPulse 1.5s infinite;
+}
+.sound-float .sound-waves {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.sound-float.active .sound-waves { opacity: 1; }
+
+@keyframes soundPulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(212, 175, 55, 0.6); }
+    50% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 12px rgba(212, 175, 55, 0); }
+}
 
 /* ==================== WHATSAPP FLOATING BUTTON ==================== */
 .whatsapp-float {
@@ -1539,7 +1543,7 @@ body.rtl .whatsapp-tooltip {
 .sticky-reserve {
     position: fixed;
     bottom: 2rem;
-    right: 6.5rem; /* Offset for WhatsApp button */
+    right: 6.5rem;
     z-index: 999;
     padding: 0.9rem 1.8rem;
     background: var(--gold);
@@ -1793,7 +1797,6 @@ body.rtl .toast-message { font-family: var(--font-arabic); }
 
     .lang-toggle,
     .btn-reserve { display: none; }
-    .theme-toggle { width: 34px; height: 34px; }
     .header-actions { gap: 0.4rem; }
 
     .mobile-lang-item {
@@ -1922,6 +1925,14 @@ body.rtl .toast-message { font-family: var(--font-arabic); }
     .newsletter-form { margin: 0 auto; }
     .footer-social { justify-content: center; }
     .footer-bottom { flex-direction: column; text-align: center; }
+
+    /* Sound Float on mobile */
+    .sound-float {
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0) + 60px);
+        right: 1rem;
+        width: 44px;
+        height: 44px;
+    }
 
     /* WhatsApp Float on mobile */
     .whatsapp-float {
