@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOVA CAFÉ | More Than Coffee</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Tajawal:wght@300;400;500;700&family=Reem+Kufi+Ink&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="scroll-progress"></div>
+    <div class="grain-overlay"></div>
+
+    <div id="preloader">
+        <div class="loader-logo">KOVA</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <header id="header">
+        <a href="#" class="logo">
+            <span class="logo-main">KOVA</span>
+            <span class="logo-sub">CAFÉ</span>
+        </a>
+        <nav>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#location">Location</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                <span class="lang-en active">EN</span>
+                <span class="lang-sep">|</span>
+                <span class="lang-ar">ع</span>
+            </button>
+            <button class="btn-reserve">Reserve</button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <video class="hero-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="assets/images/hero-poster.jpg">
+            <source src="assets/video/hero-video.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-overlay"></div>
+        <div class="particles-container" id="particles"></div>
+
+        <div class="hero-content">
+            <div class="hero-meta">
+                <span class="hero-eyebrow" id="timeGreeting">GOOD EVENING · KOVA CAFÉ</span>
+                <span class="open-status" id="openStatus">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Open Now · Closes 12 AM</span>
+                </span>
+            </div>
+
+            <h1 class="hero-headline" id="splitHeadline">
+                <span class="line">Good Coffee</span>
+                <span class="line">Better Days</span>
+            </h1>
+
+            <p class="hero-subheadline">More than coffee. It's a feeling you'll want to come back to.</p>
+
+            <div class="hero-ctas">
+                <a href="#reserve" class="btn-primary magnetic">Reserve a Table</a>
+                <button id="openMeaningModal" class="btn-secondary magnetic">Discover KOVA</button>
+            </div>
+
+            <div class="mini-widget">
+                <div class="widget-field">
+                    <span class="widget-label">Tonight</span>
+                    <span class="widget-value">2 Guests</span>
+                    <span class="widget-value">8:00 PM</span>
+                </div>
+                <button class="widget-btn">Check Availability →</button>
+            </div>
+
+            <div class="quote-ticker">
+                <span class="quote-text" id="quoteTicker">More than coffee. It's a feeling.</span>
+            </div>
+        </div>
+
+        <div class="instagram-feed">
+            <span class="ig-label">@kovacafe</span>
+            <div class="ig-grid">
+                <div class="ig-item" style="background-image: url('assets/images/instagram/ig-1.jpg');"></div>
+                <div class="ig-item" style="background-image: url('assets/images/instagram/ig-2.jpg');"></div>
+                <div class="ig-item" style="background-image: url('assets/images/instagram/ig-3.jpg');"></div>
+                <div class="ig-item" style="background-image: url('assets/images/instagram/ig-4.jpg');"></div>
+            </div>
+        </div>
+
+        <div class="floating-actions">
+            <button class="float-btn" id="soundToggle" aria-label="Toggle ambient sound">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                    <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+            </button>
+            <a href="https://open.spotify.com" target="_blank" class="float-btn" aria-label="KOVA Playlist">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 14.36c-.16.26-.52.34-.78.18-2.14-1.3-4.84-1.6-8.02-.88-.3.07-.6-.12-.66-.42-.07-.3.12-.6.42-.66 3.46-.8 6.44-.46 8.84.98.26.16.34.52.2.8zm1.24-2.76c-.2.32-.62.42-.94.22-2.44-1.5-6.16-1.94-9.04-1.06-.36.11-.74-.1-.85-.46-.1-.36.1-.74.46-.84 3.3-1 7.4-.5 10.2 1.22.32.2.42.62.22.94zm.1-2.88C15.14 8.98 9.9 8.8 7.08 9.65c-.42.13-.86-.12-.98-.54-.12-.42.12-.86.54-.98 3.24-.98 9.02-.78 12.42 1.24.38.22.5.7.28 1.08-.22.38-.7.5-1.08.28z"/>
+                </svg>
+            </a>
+            <a href="https://maps.google.com/?q=KOVA+Cafe+Cairo" target="_blank" class="float-btn" aria-label="Get Directions">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll to Explore</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- MEANING MODAL -->
+    <div class="meaning-modal" id="meaningModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-content">
+            <button class="modal-close" data-close aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <span class="modal-eyebrow">THE MEANING</span>
+            <h2 class="modal-title" id="modalTitle">KOVA</h2>
+            <p class="modal-subtitle">More Than Coffee. It's a Feeling.</p>
+
+            <div class="meaning-cards">
+                <div class="meaning-card">
+                    <span class="card-letter">K</span>
+                    <span class="card-word-en">KICK</span>
+                    <span class="card-word-ar">رَكْلَة</span>
+                    <span class="card-divider"></span>
+                    <p class="card-desc-en">The perfect kick to start your day</p>
+                    <p class="card-desc-ar">البداية المثالية ليومك</p>
+                </div>
+
+                <div class="meaning-card">
+                    <span class="card-letter">O</span>
+                    <span class="card-word-en">OPEN</span>
+                    <span class="card-word-ar">مَفْتُوح</span>
+                    <span class="card-divider"></span>
+                    <p class="card-desc-en">An open space for open minds</p>
+                    <p class="card-desc-ar">مساحة مفتوحة للعقول المنفتحة</p>
+                </div>
+
+                <div class="meaning-card">
+                    <span class="card-letter">V</span>
+                    <span class="card-word-en">VIBE</span>
+                    <span class="card-word-ar">جَوّ</span>
+                    <span class="card-divider"></span>
+                    <p class="card-desc-en">A vibe that keeps you coming back</p>
+                    <p class="card-desc-ar">جو يخليك ترجع تاني</p>
+                </div>
+
+                <div class="meaning-card">
+                    <span class="card-letter">A</span>
+                    <span class="card-word-en">ATMOSPHERE</span>
+                    <span class="card-word-ar">الأَجْوَاء</span>
+                    <span class="card-divider"></span>
+                    <p class="card-desc-en">An atmosphere that feels like home</p>
+                    <p class="card-desc-ar">أجواء تحس فيها إنك في بيتك</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="features" id="gallery">
+        <h2 class="section-title reveal">The KOVA Experience</h2>
+        <div class="cards-grid">
+            <div class="card reveal">
+                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop" alt="Coffee Pouring">
+                <div class="card-overlay">
+                    <h3 class="card-title">Sip The Moment</h3>
+                    <span class="card-brand">KOVA CAFÉ</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop" alt="Cafe Atmosphere">
+                <div class="card-overlay">
+                    <h3 class="card-title">Good Food<br>Great Company</h3>
+                    <span class="card-brand">THE KOVA FEELING</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1000&auto=format&fit=crop" alt="Signature Drinks">
+                <div class="card-overlay">
+                    <h3 class="card-title">Signature Drinks</h3>
+                    <span class="card-brand">CRAFTED WITH LOVE</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1000&auto=format&fit=crop" alt="Desserts">
+                <div class="card-overlay">
+                    <h3 class="card-title">The Kova Feeling</h3>
+                    <span class="card-brand">DESSERTS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+        <h2 class="section-title reveal">Our Menu</h2>
+        <div class="menu-tabs reveal">
+            <button class="tab-btn active" data-target="coffee">COFFEE</button>
+            <button class="tab-btn" data-target="non-coffee">NON COFFEE</button>
+            <button class="tab-btn" data-target="desserts">DESSERTS</button>
+        </div>
+        <div class="menu-container reveal">
+            <div class="menu-panel active" id="coffee">
+                <div class="menu-category">
+                    <h3>COFFEE</h3>
+                    <div class="menu-item"><span class="menu-item-name">Espresso</span><span class="menu-item-price">70</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Americano</span><span class="menu-item-price">80</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Cappuccino</span><span class="menu-item-price">95</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Latte</span><span class="menu-item-price">100</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Spanish Latte</span><span class="menu-item-price">115</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Mocha</span><span class="menu-item-price">120</span></div>
+                </div>
+            </div>
+            <div class="menu-panel" id="non-coffee">
+                <div class="menu-category">
+                    <h3>NON COFFEE</h3>
+                    <div class="menu-item"><span class="menu-item-name">Matcha Latte</span><span class="menu-item-price">110</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Hot Chocolate</span><span class="menu-item-price">100</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Iced Chocolate</span><span class="menu-item-price">90</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Red Velvet Latte</span><span class="menu-item-price">120</span></div>
+                </div>
+            </div>
+            <div class="menu-panel" id="desserts">
+                <div class="menu-category">
+                    <h3>DESSERTS</h3>
+                    <div class="menu-item"><span class="menu-item-name">Chocolate Lava Cake</span><span class="menu-item-price">140</span></div>
+                    <div class="menu-item"><span class="menu-item-name">New York Cheesecake</span><span class="menu-item-price">130</span></div>
+                    <div class="menu-item"><span class="menu-item-name">Biscoff Cheesecake</span><span class="menu-item-price">130</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="brand-story" id="about">
+        <div class="reveal">
+            <h2>More Than Coffee.<br>It's a Feeling.</h2>
+            <p>KOVA — Kick, Open, Vibe, Atmosphere.</p>
+        </div>
+    </section>
+
+    <footer id="location">
+        <div class="footer-logo">KOVA</div>
+        <div class="footer-sub">CAFÉ</div>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#location">Location</a>
+        </div>
+        <p class="copyright">&copy; 2024 KOVA CAFÉ. All rights reserved.</p>
+    </footer>
+
+    <audio id="ambientAudio" loop preload="none">
+        <source src="assets/audio/cafe-ambience.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
